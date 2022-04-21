@@ -14,7 +14,7 @@
 
 
 <h:body>
-	<h:form id="form">
+	<h:form id="topForm">
 		<p:panelGrid id="clocking">
 			<f:facet name="header">
 				<p:row>
@@ -31,11 +31,13 @@
 			<p:row>
 				<p:column>
 					<p:commandButton value="Punch in"
-						styleClass="centeredColumnContent" />
+						styleClass="centeredColumnContent" action="#{indexBean.onPunchIn}"
+						update="topForm:lastActions" />
 				</p:column>
 				<p:column>
 					<p:commandButton value="Punch out"
-						styleClass="centeredColumnContent" />
+						styleClass="centeredColumnContent"
+						action="#{indexBean.onPunchOut}" update="topForm:lastActions" />
 				</p:column>
 			</p:row>
 		</p:panelGrid>
@@ -47,16 +49,11 @@
 				</p:row>
 			</f:facet>
 
+			<h:outputText value="#{indexBean.lastActions.get(0).action}" />
+			<h:outputText value="#{indexBean.lastActions.get(0).timeStamp}" />
 
-
-			<h:outputText value="Punch in: " />
-			<h:outputText value="date1" />
-
-
-
-
-			<h:outputText value="Punch out: " />
-			<h:outputText value="date2" />
+			<h:outputText value="#{indexBean.lastActions.get(1).action}" />
+			<h:outputText value="#{indexBean.lastActions.get(1).timeStamp}" />
 
 
 		</p:panelGrid>
