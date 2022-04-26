@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 
 import DTO.ClockingAction;
 import enums.ActionType;
 import model.Student;
 
-@Named(value = "indexBean")
+@ManagedBean
 @ViewScoped
 public class IndexBean implements Serializable {
 
@@ -22,9 +22,9 @@ public class IndexBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public LocalDateTime dateTime;
-	public List<ClockingAction> lastActions;
-	public String test = "TEST";
+	private LocalDateTime dateTime;
+	private List<ClockingAction> lastActions;
+	private String test = "TEST";
 
 	@PostConstruct
 	public void init() {
