@@ -1,19 +1,17 @@
 package DTO;
 
-import java.time.LocalDateTime;
-
 import enums.ActionType;
 
 public class ClockingAction {
 
-	private LocalDateTime timeStamp;
+	private String timeStamp;
 	private String action;
 
 	public ClockingAction() {
 
 	}
 
-	public ClockingAction(ActionType actionType, LocalDateTime timeStamp) {
+	public ClockingAction(ActionType actionType, String timeStamp) {
 		if (actionType.equals(ActionType.PUNCH_IN)) {
 			this.action = "Punch in";
 		} else if (actionType.equals(ActionType.PUNCH_OUT)) {
@@ -22,11 +20,11 @@ public class ClockingAction {
 		this.timeStamp = timeStamp;
 	}
 
-	public LocalDateTime getTimeStamp() {
+	public String getTimeStamp() {
 		return timeStamp;
 	}
 
-	public void setTimeStamp(LocalDateTime timeStamp) {
+	public void setTimeStamp(String timeStamp) {
 		this.timeStamp = timeStamp;
 	}
 

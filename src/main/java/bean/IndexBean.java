@@ -2,6 +2,7 @@ package bean;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,6 @@ import javax.faces.bean.ViewScoped;
 
 import DTO.ClockingAction;
 import enums.ActionType;
-import model.Student;
 
 @ManagedBean
 @ViewScoped
@@ -21,10 +21,10 @@ public class IndexBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 	private LocalDateTime dateTime;
 	private List<ClockingAction> lastActions;
-	private String test = "TEST";
 
 	@PostConstruct
 	public void init() {
@@ -38,26 +38,20 @@ public class IndexBean implements Serializable {
 	public void onPunchIn() {
 		ClockingAction auxAction = lastActions.get(0);
 		lastActions.set(1, auxAction);
-		ClockingAction newClockingAction = new ClockingAction(ActionType.PUNCH_IN, dateTime);
+		String timeStamp = LocalDateTime.now().format(dtf);
+		ClockingAction newClockingAction = new ClockingAction(ActionType.PUNCH_IN, timeStamp);
 		lastActions.set(0, newClockingAction);
 	}
 
 	public void onPunchOut() {
 		ClockingAction auxAction = lastActions.get(0);
 		lastActions.set(1, auxAction);
-		ClockingAction newClockingAction = new ClockingAction(ActionType.PUNCH_OUT, dateTime);
+		String timeStamp = LocalDateTime.now().format(dtf);
+		ClockingAction newClockingAction = new ClockingAction(ActionType.PUNCH_OUT, timeStamp);
 		lastActions.set(0, newClockingAction);
 	}
 
 	// GETTERS AND SETTERS
-
-	public String getTest() {
-		return test;
-	}
-
-	public void setTest(String test) {
-		this.test = test;
-	}
 
 	public LocalDateTime getDateTime() {
 		return dateTime;
