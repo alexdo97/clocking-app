@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="styles/style.css" />
+</h:head>
+
+
+<h:body>
+	<h:form id="topForm">
+		<p:dataTable var="row"
+			value="#{clockingHistoryBean.clockingEntryList}">
+			<p:column headerText="Id" styleClass="" filterBy="#{row.id}"
+				filterMatchMode="contains">
+				<h:outputText value="#{row.id}" />
+			</p:column>
+
+			<p:column headerText="Last Name" styleClass=""
+				filterBy="#{row.lastName}" filterMatchMode="contains">
+				<h:outputText value="#{row.lastName}" />
+			</p:column>
+
+			<p:column headerText="First Name" styleClass=""
+				filterBy="#{row.firstName}" filterMatchMode="contains">
+				<h:outputText value="#{row.firstName}" />
+			</p:column>
+
+			<p:column headerText="Punch type" styleClass=""
+				filterBy="#{row.punchType}" filterMatchMode="contains">
+				<h:outputText value="#{row.punchType}" />
+			</p:column>
+
+			<p:column headerText="Date" styleClass="" filterBy="#{row.date}"
+				filterMatchMode="contains">
+				<h:outputText value="#{row.date}" />
+			</p:column>
+
+			<p:column headerText="Time" styleClass="" filterBy="#{row.time}"
+				filterMatchMode="contains">
+				<h:outputText value="#{row.time}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>
