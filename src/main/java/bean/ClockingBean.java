@@ -15,7 +15,7 @@ import enums.ActionType;
 
 @ManagedBean
 @ViewScoped
-public class IndexBean implements Serializable {
+public class ClockingBean implements Serializable {
 
 	/**
 	 * 
@@ -31,7 +31,7 @@ public class IndexBean implements Serializable {
 		lastActions = new ArrayList<ClockingAction>();
 		lastActions.add(new ClockingAction());
 		lastActions.add(new ClockingAction());
-		System.out.println("IndexBean init");
+		System.out.println("ClockingBean init");
 		dateTime = LocalDateTime.now();
 	}
 
