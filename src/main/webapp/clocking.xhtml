@@ -23,16 +23,15 @@
 				<p:row>
 					<p:column colspan="2">
 						<h:outputText value="Local date time: " />
-						<p:clock pattern="dd.MM.yyyy HH:mm:ss" mode="server"
-							value="#{clockingBean.dateTime}" />
+						<p:clock pattern="dd-MM-yyyy HH:mm:ss" mode="server" />
 					</p:column>
 				</p:row>
 			</f:facet>
 			<p:row>
 				<p:column>
 					<p:commandButton value="Punch in"
-						styleClass="centeredColumnContent" action="#{clockingBean.onPunchIn}"
-						update="topForm:lastActions" />
+						styleClass="centeredColumnContent"
+						action="#{clockingBean.onPunchIn}" update="topForm:lastActions" />
 				</p:column>
 				<p:column>
 					<p:commandButton value="Punch out"
@@ -49,11 +48,15 @@
 				</p:row>
 			</f:facet>
 
-			<h:outputText value="#{clockingBean.lastActions.get(0).action}" />
-			<h:outputText value="#{clockingBean.lastActions.get(0).timeStamp}" />
+			<h:outputText
+				value="#{clockingBean.lastClockingActions.get(0).punchType}" />
+			<h:outputText
+				value="#{clockingBean.lastClockingActions.get(0).dateTime}" />
 
-			<h:outputText value="#{clockingBean.lastActions.get(1).action}" />
-			<h:outputText value="#{clockingBean.lastActions.get(1).timeStamp}" />
+			<h:outputText
+				value="#{clockingBean.lastClockingActions.get(1).punchType}" />
+			<h:outputText
+				value="#{clockingBean.lastClockingActions.get(1).dateTime}" />
 
 
 		</p:panelGrid>

@@ -10,7 +10,7 @@ public class Util {
 
 	static {
 		if (factory == null) {
-			factory = Persistence.createEntityManagerFactory("default");
+			factory = Persistence.createEntityManagerFactory("clocking-app");
 		}
 	}
 

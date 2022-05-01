@@ -1,7 +1,8 @@
 package service;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
 
 import dao.EmployeeDAO;
 import model.Employee;
@@ -19,4 +20,7 @@ public class EmployeeService {
 		return dao.getById(id);
 	}
 
+	public List<Employee> getAll() {
+		return dao.findAll();
+	}
 }

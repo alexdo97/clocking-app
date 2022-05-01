@@ -24,12 +24,12 @@
 
 			<p:column headerText="Last Name" styleClass=""
 				filterBy="#{row.lastName}" filterMatchMode="contains">
-				<h:outputText value="#{row.lastName}" />
+				<h:outputText value="#{row.employee.lastName}" />
 			</p:column>
 
 			<p:column headerText="First Name" styleClass=""
 				filterBy="#{row.firstName}" filterMatchMode="contains">
-				<h:outputText value="#{row.firstName}" />
+				<h:outputText value="#{row.employee.firstName}" />
 			</p:column>
 
 			<p:column headerText="Punch type" styleClass=""

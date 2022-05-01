@@ -36,11 +36,12 @@ public class ClockingEntry {
 
 	}
 
-	public ClockingEntry(String punchType, String date, String time) {
+	public ClockingEntry(String punchType, String date, String time, Employee employee) {
 
 		this.punchType = punchType;
 		this.date = date;
 		this.time = time;
+		this.employee = employee;
 	}
 
 	// GETTERS AND SETTERS
@@ -71,6 +72,22 @@ public class ClockingEntry {
 
 	public void setTime(String time) {
 		this.time = time;
+	}
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+	public String getDateTime() {
+		if (date != null && time != null) {
+			return date + " " + time;
+		} else {
+			return "";
+		}
 	}
 
 }

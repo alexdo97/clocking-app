@@ -5,17 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
 
-import DTO.ClockingAction;
 import model.ClockingEntry;
-import model.Student;
+import model.Employee;
+import service.ClockingService;
+import service.EmployeeService;
 
+@SuppressWarnings("deprecation")
 @ManagedBean
 @ViewScoped
 public class ClockingHistoryBean implements Serializable {
@@ -26,47 +25,20 @@ public class ClockingHistoryBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private List<ClockingEntry> clockingEntryList = new ArrayList<ClockingEntry>();
+	private Employee identityEmployee;
+
+	@EJB
+	private EmployeeService employeeService;
+	@EJB
+	private ClockingService clockingService;
 
 	@PostConstruct
 	public void init() {
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("clocking-app");
-		EntityManager entityManager = factory.createEntityManager();
-		try {
-			entityManager.getTransaction().begin();
-			ClockingEntry clockingEntry1 = new ClockingEntry("Punch In", "2022-04-27", "11:37:30");
-			entityManager.persist(clockingEntry1);
-			entityManager.getTransaction().commit();
-		} catch (Exception e) {
-			entityManager.getTransaction().rollback();
-		}
-		try {
-			entityManager.getTransaction().begin();
-			ClockingEntry clockingEntry2 = new ClockingEntry("Punch Out", "2022-04-27", "11:37:40");
-			entityManager.persist(clockingEntry2);
-			entityManager.getTransaction().commit();
-		} catch (Exception e) {
-			entityManager.getTransaction().rollback();
-		}
-
-		try {
-			entityManager.getTransaction().begin();
-			String sql = "select ce from ClockingEntry ce";
-			TypedQuery<ClockingEntry> query = entityManager.createQuery(sql, ClockingEntry.class);
-			clockingEntryList = query.getResultList();
-			entityManager.getTransaction().commit();
-		} catch (Exception e) {
-			entityManager.getTransaction().rollback();
-		}
-//		entityManager.getTransaction().begin();
-//		String sql = "select ce from ClockingEntry ce";
-//		TypedQuery<ClockingEntry> query = entityManager.createQuery(sql, ClockingEntry.class);
-//		clockingEntryList = query.getResultList();
-//		entityManager.getTransaction().commit();
-		entityManager.close();
-		factory.close();
-
+		employeeService = new EmployeeService();
+		clockingService = new ClockingService();
+		identityEmployee = employeeService.getById(1L);
 		System.out.println("ClockingHistoryBean init");
-
+		clockingEntryList = clockingService.getAllByEmployeeId(identityEmployee.getId());
 	}
 
 	// GETTERS AND SETTERS
