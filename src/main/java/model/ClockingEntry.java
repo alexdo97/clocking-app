@@ -2,9 +2,12 @@ package model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,14 +16,8 @@ public class ClockingEntry {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "clocking_id", unique = true, nullable = false)
+	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
-
-	@Column(name = "last_name", nullable = false, length = 150)
-	private String firstName;
-
-	@Column(name = "first_name", nullable = false, length = 150)
-	private String lastName;
 
 	@Column(name = "punch_type", nullable = false, length = 150)
 	private String punchType;
@@ -31,13 +28,16 @@ public class ClockingEntry {
 	@Column(name = "time", nullable = false, length = 150)
 	private String time;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "employee_id")
+	private Employee employee;
+
 	public ClockingEntry() {
 
 	}
 
-	public ClockingEntry(String lastName, String firstName, String punchType, String date, String time) {
-		this.lastName = lastName;
-		this.firstName = firstName;
+	public ClockingEntry(String punchType, String date, String time) {
+
 		this.punchType = punchType;
 		this.date = date;
 		this.time = time;
@@ -47,22 +47,6 @@ public class ClockingEntry {
 
 	public Long getId() {
 		return id;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 	public String getPunchType() {

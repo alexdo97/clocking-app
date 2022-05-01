@@ -33,7 +33,7 @@ public class ClockingHistoryBean implements Serializable {
 		EntityManager entityManager = factory.createEntityManager();
 		try {
 			entityManager.getTransaction().begin();
-			ClockingEntry clockingEntry1 = new ClockingEntry("Dobrin", "Alex", "Punch In", "2022-04-27", "11:37:30");
+			ClockingEntry clockingEntry1 = new ClockingEntry("Punch In", "2022-04-27", "11:37:30");
 			entityManager.persist(clockingEntry1);
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
@@ -41,7 +41,7 @@ public class ClockingHistoryBean implements Serializable {
 		}
 		try {
 			entityManager.getTransaction().begin();
-			ClockingEntry clockingEntry2 = new ClockingEntry("Dobrin", "Alex", "Punch Out", "2022-04-27", "11:37:40");
+			ClockingEntry clockingEntry2 = new ClockingEntry("Punch Out", "2022-04-27", "11:37:40");
 			entityManager.persist(clockingEntry2);
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {

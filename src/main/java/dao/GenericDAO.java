@@ -31,7 +31,6 @@ public class GenericDAO<T, PK extends Serializable> {
 	public T save(final T entity) {
 		T entityReturn = null;
 		try {
-
 			entityManager.getTransaction().begin();
 			entityReturn = entityManager.merge(entity);
 			entityManager.getTransaction().commit();
@@ -45,7 +44,6 @@ public class GenericDAO<T, PK extends Serializable> {
 
 	public T getById(final PK id) {
 		T t = null;
-
 		try {
 			entityManager.getTransaction().begin();
 			t = entityManager.find(entityClass, id);
@@ -58,7 +56,6 @@ public class GenericDAO<T, PK extends Serializable> {
 	}
 
 	public void delete(final T entity) {
-
 		entityManager.getTransaction().begin();
 		entityManager.remove(entity);
 		entityManager.getTransaction().commit();

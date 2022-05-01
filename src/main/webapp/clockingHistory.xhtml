@@ -16,7 +16,7 @@
 <h:body>
 	<h:form id="topForm">
 		<p:dataTable var="row"
-			value="#{clockingHistoryBean.clockingEntryList}">
+			value="#{clockingHistoryBean.clockingEntryList}" lazy="false">
 			<p:column headerText="Id" styleClass="" filterBy="#{row.id}"
 				filterMatchMode="contains">
 				<h:outputText value="#{row.id}" />
