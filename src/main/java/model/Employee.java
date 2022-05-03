@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,20 +28,19 @@ public class Employee {
 	@Column(name = "first_name", nullable = false, length = 150)
 	private String lastName;
 
-	@Column(name = "role", nullable = false, length = 150)
-	private String role;
-
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ClockingEntry> clockingEntries = new ArrayList<ClockingEntry>();
+
+	@OneToOne
+	private Identity identity;
 
 	public Employee() {
 
 	}
 
-	public Employee(String firstName, String lastName, String role) {
+	public Employee(String firstName, String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.role = role;
 	}
 
 	// GETTERS AND SETTERS
@@ -65,20 +65,20 @@ public class Employee {
 		this.lastName = lastName;
 	}
 
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
 	public List<ClockingEntry> getClockingEntries() {
 		return clockingEntries;
 	}
 
 	public void setClockingEntries(List<ClockingEntry> clockingEntries) {
 		this.clockingEntries = clockingEntries;
+	}
+
+	public Identity getIdentity() {
+		return identity;
+	}
+
+	public void setIdentity(Identity identity) {
+		this.identity = identity;
 	}
 
 }

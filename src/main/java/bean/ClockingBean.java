@@ -47,7 +47,7 @@ public class ClockingBean implements Serializable {
 		lastClockingActions = new ArrayList<ClockingEntry>();
 		lastClockingActions.add(new ClockingEntry());
 		lastClockingActions.add(new ClockingEntry());
-		System.out.println("ClockingBean init");
+		System.out.println(ClockingBean.class.getName() + " init");
 	}
 
 	public void onPunchIn() {
