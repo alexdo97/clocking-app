@@ -23,8 +23,8 @@ public class Identity {
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 
-	@Column(name = "name", nullable = false, length = 150)
-	private String name;
+	@Column(name = "username", nullable = false, length = 150)
+	private String username;
 
 	@Column(name = "password", nullable = false, length = 150)
 	private String password;
@@ -59,12 +59,12 @@ public class Identity {
 		return id;
 	}
 
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {

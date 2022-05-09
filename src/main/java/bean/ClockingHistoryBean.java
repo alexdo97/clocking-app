@@ -39,7 +39,6 @@ public class ClockingHistoryBean implements Serializable {
 		identityEmployee = employeeService.getById(1L);
 		clockingEntryList = clockingService.getAllByEmployeeId(identityEmployee.getId());
 		System.out.println(ClockingHistoryBean.class.getName() + " init");
-
 	}
 
 	// GETTERS AND SETTERS

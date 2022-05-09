@@ -2,8 +2,10 @@ package service;
 
 import java.util.List;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+
 import dao.IdentityDAO;
-import model.Employee;
 import model.Identity;
 
 public class IdentityService {
@@ -22,7 +24,23 @@ public class IdentityService {
 		return dao.findAll();
 	}
 
-	public List<Identity> findByUsernamePassword(String userName, String password) {
-		return dao.findByUsernamePassword(userName, password);
+	public Identity findByUsernamePassword(String username, String password) {
+		return dao.findByUsernamePassword(username, password);
+	}
+
+	public Identity getLoggedUser() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = context.getExternalContext();
+		Identity loggedUser = (Identity) externalContext.getSessionMap().get("loggedUser");
+
+		return loggedUser;
+	}
+
+	public void setLoggedUser(Identity identity) {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = context.getExternalContext();
+		externalContext.getSessionMap().put("loggedUser", identity);
 	}
 }

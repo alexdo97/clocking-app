@@ -27,19 +27,7 @@ public class ClockingService {
 	}
 
 	public List<ClockingEntry> getAllByEmployeeId(Long id) {
-		List<ClockingEntry> clockingEntryList = new ArrayList<ClockingEntry>();
-		try {
-			em.getTransaction().begin();
-			String sql = "from ClockingEntry where employee_id = :id";
-			TypedQuery<ClockingEntry> query = em.createQuery(sql, ClockingEntry.class);
-			query.setParameter("id", id);
-			clockingEntryList = query.getResultList();
-			em.getTransaction().commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-			em.getTransaction().rollback();
-		}
-		return clockingEntryList;
+		return dao.getAllByEmployeeId(id);
 	}
 
 	public ClockingEntry getById(Long id) {
@@ -48,5 +36,9 @@ public class ClockingService {
 
 	public void save(ClockingEntry clockingEntry) {
 		dao.save(clockingEntry);
+	}
+
+	public List<ClockingEntry> getLastActions(Long id) {
+		return dao.getLastActions(id);
 	}
 }

@@ -10,12 +10,16 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 import enums.ActionType;
 import model.ClockingEntry;
 import model.Employee;
+import model.Identity;
 import service.ClockingService;
 import service.EmployeeService;
+import service.IdentityService;
 
 @SuppressWarnings("deprecation")
 @ManagedBean
@@ -39,14 +43,16 @@ public class ClockingBean implements Serializable {
 	@EJB
 	private ClockingService clockingService;
 
+	@EJB
+	private IdentityService identityService;
+
 	@PostConstruct
 	public void init() {
 		employeeService = new EmployeeService();
 		clockingService = new ClockingService();
-		identityEmployee = employeeService.getById(1L);
-		lastClockingActions = new ArrayList<ClockingEntry>();
-		lastClockingActions.add(new ClockingEntry());
-		lastClockingActions.add(new ClockingEntry());
+		identityService = new IdentityService();
+		identityEmployee = identityService.getLoggedUser().getEmployee();
+		lastClockingActions = clockingService.getLastActions(identityEmployee.getId());
 		System.out.println(ClockingBean.class.getName() + " init");
 	}
 

@@ -1,7 +1,5 @@
 package bean;
 
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -19,7 +17,6 @@ import service.IdentityService;
 @ViewScoped
 public class LoginBean {
 
-	private Identity loggedUser;
 	private Identity identity;
 	private IdentityService userService;
 
@@ -40,18 +37,14 @@ public class LoginBean {
 	}
 
 	public String login() {
-		List<Identity> list = userService.findByUsernamePassword(this.identity.getName(),
-				DigestUtils.shaHex(this.identity.getPassword()));
+		Identity checkedIdentity = userService.findByUsernamePassword(this.identity.getUsername(),
+				this.identity.getPassword());
 
-		if (list.size() > 0) {
-			loggedUser = list.get(0);
+		if (checkedIdentity != null) {
+			identity = checkedIdentity;
 			identity.setPassword("");
-
-			FacesContext context = FacesContext.getCurrentInstance();
-			ExternalContext externalContext = context.getExternalContext();
-			externalContext.getSessionMap().put("loggedUser", identity);
-
-			return "clocking.xhtml";
+			userService.setLoggedUser(identity);
+			return "clocking.xhtml?faces-redirect=true";
 		} else {
 			this.showMessage("Username or password incorrect!");
 		}
@@ -62,19 +55,6 @@ public class LoginBean {
 		FacesContext context = FacesContext.getCurrentInstance();
 		FacesMessage message = new FacesMessage("Notice", msg);
 		context.addMessage(null, message);
-	}
-
-	public Identity getLoggedUser() {
-
-		FacesContext context = FacesContext.getCurrentInstance();
-		ExternalContext externalContext = context.getExternalContext();
-		Identity loggedUser = (Identity) externalContext.getSessionMap().get("loggedUser");
-
-		return loggedUser;
-	}
-
-	public void setLoggedUser(Identity loggedUser) {
-		this.loggedUser = loggedUser;
 	}
 
 	public void clearForm() {
