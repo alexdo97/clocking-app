@@ -23,7 +23,7 @@
 			<p:graphicImage name="images/ajaxloadingbar.gif" />
 		</p:dialog>
 
-		<h:form id="form_login">
+		<h:form id="form">
 
 			<p:messages id="messages" showDetail="true" closable="true">
 				<p:autoUpdate />
@@ -46,7 +46,12 @@
 				</p:column>
 				<p:column>
 					<p:commandButton value="OK" icon="fa fa-fw fa-user-secret"
-						update="form_login" action="#{loginBean.login}" />
+						update="form" action="#{loginBean.login}" />
+				</p:column>
+				<p:column>
+					<p:commandButton value="REGISTER" icon="fa fa-fw fa-user-secret"
+						action="register.xhtml?faces-redirect=true" />
+
 				</p:column>
 			</p:panelGrid>
 

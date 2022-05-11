@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Login</title>
+	<link rel="stylesheet" type="text/css" href="resources/css/style.css" />
+</h:head>
+<h:body>
+
+	<div class="center" id="content">
+
+		<p:ajaxStatus onstart="PF('statusDialog').show()"
+			onsuccess="PF('statusDialog').hide()" />
+
+
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false">
+			<p:graphicImage name="images/ajaxloadingbar.gif" />
+		</p:dialog>
+
+		<h:form id="form">
+
+			<p:messages id="messages" showDetail="true" closable="true">
+				<p:autoUpdate />
+			</p:messages>
+
+			<p:panelGrid columns="2" cellpadding="7" styleClass="p-mb-3">
+
+				<p:outputLabel value="First Name:" />
+				<p:inputText id="firstName"
+					value="#{registerBean.newEmployee.firstName}" required="true">
+					<p:ajax event="blur" global="false" />
+				</p:inputText>
+
+				<p:outputLabel value="Last Name:" />
+				<p:inputText value="#{registerBean.newEmployee.lastName}"
+					required="true">
+					<p:ajax event="blur" global="false" />
+				</p:inputText>
+
+				<p:outputLabel value="Email address:" />
+				<p:inputText id="email" value="#{registerBean.newIdentity.email}"
+					required="true">
+					<p:ajax event="blur" global="false" />
+				</p:inputText>
+				<ui:remove>
+					<p:inputText id="email" value="#{registerBean.newIdentity.email}"
+						required="true"
+						validatorMessage="#{registerBean.newIdentity.email} is not a valid email">
+						<f:validateRegex
+							pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+						<p:message for="email" />
+						<f:validateLength minimum="2" />
+						<p:ajax event="blur" global="false" />
+					</p:inputText>
+				</ui:remove>
+
+				<p:outputLabel value="Username:" />
+				<p:inputText value="#{registerBean.newIdentity.username}"
+					required="true">
+					<p:ajax event="blur" global="false" />
+				</p:inputText>
+
+				<p:outputLabel value="Password:" />
+				<p:inputText type="password"
+					value="#{registerBean.newIdentity.password}" required="true">
+					<p:ajax event="blur" global="false" />
+				</p:inputText>
+
+				<p:outputLabel value="Confirm Password:" />
+				<p:inputText type="password" value="#{registerBean.confirmPassword}"
+					required="true">
+					<p:ajax event="blur" global="false" />
+				</p:inputText>
+
+				<p:commandButton value="OK" icon="fa fa-fw fa-user-secret"
+					update="form" action="#{registerBean.validateRegistration}" />
+			</p:panelGrid>
+
+		</h:form>
+	</div>
+	<ui:include src="/template/footer.xhtml" />
+</h:body>
+</html>

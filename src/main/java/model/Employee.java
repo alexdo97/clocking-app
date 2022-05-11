@@ -31,7 +31,7 @@ public class Employee {
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ClockingEntry> clockingEntries = new ArrayList<ClockingEntry>();
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Identity identity;
 
 	public Employee() {

@@ -38,7 +38,7 @@ public class LoginBean {
 
 	public String login() {
 		Identity checkedIdentity = userService.findByUsernamePassword(this.identity.getUsername(),
-				this.identity.getPassword());
+				DigestUtils.shaHex(identity.getPassword()));
 
 		if (checkedIdentity != null) {
 			identity = checkedIdentity;

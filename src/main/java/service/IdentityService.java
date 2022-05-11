@@ -28,6 +28,14 @@ public class IdentityService {
 		return dao.findByUsernamePassword(username, password);
 	}
 
+	public Identity findByUsername(String username) {
+		return dao.findByUsername(username);
+	}
+
+	public Identity findByEmail(String email) {
+		return dao.findByEmail(email);
+	}
+
 	public Identity getLoggedUser() {
 
 		FacesContext context = FacesContext.getCurrentInstance();

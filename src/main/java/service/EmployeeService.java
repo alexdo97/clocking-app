@@ -23,4 +23,10 @@ public class EmployeeService {
 	public List<Employee> getAll() {
 		return dao.findAll();
 	}
+
+	public void save(Employee employee) {
+		dao.save(employee);
+	}
+
+//	public Employee getBy
 }

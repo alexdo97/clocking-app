@@ -28,18 +28,16 @@ public class GenericDAO<T, PK extends Serializable> {
 		this.entityClass = ((Class<T>) genericSuperclass.getActualTypeArguments()[0]);
 	}
 
-	public T save(final T entity) {
-		T entityReturn = null;
+	public void save(final T entity) {
+		
 		try {
 			entityManager.getTransaction().begin();
-			entityReturn = entityManager.merge(entity);
+			entityManager.persist(entity);
 			entityManager.getTransaction().commit();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		return entityReturn;
 	}
 
 	public T getById(final PK id) {

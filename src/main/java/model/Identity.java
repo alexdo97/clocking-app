@@ -23,11 +23,14 @@ public class Identity {
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 
-	@Column(name = "username", nullable = false, length = 150)
+	@Column(name = "username", unique = true, nullable = false, length = 150)
 	private String username;
 
 	@Column(name = "password", nullable = false, length = 150)
 	private String password;
+
+	@Column(name = "email", unique = true, nullable = false, length = 150)
+	private String email;
 
 	@Column(name = "profile", nullable = false)
 	private Integer profile;
@@ -38,6 +41,10 @@ public class Identity {
 
 	@Transient
 	private Profile profileEnum;
+
+	public Identity() {
+		profile = 2;
+	}
 
 	public Integer getProfile() {
 		return profile;
@@ -81,6 +88,14 @@ public class Identity {
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }
