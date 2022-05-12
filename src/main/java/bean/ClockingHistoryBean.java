@@ -11,8 +11,10 @@ import javax.faces.bean.ViewScoped;
 
 import model.ClockingEntry;
 import model.Employee;
+import model.Identity;
 import service.ClockingService;
 import service.EmployeeService;
+import service.IdentityService;
 
 @SuppressWarnings("deprecation")
 @ManagedBean
@@ -25,8 +27,10 @@ public class ClockingHistoryBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private List<ClockingEntry> clockingEntryList = new ArrayList<ClockingEntry>();
-	private Employee identityEmployee;
-
+	private Identity identity;
+	
+	@EJB
+	private IdentityService identityService;
 	@EJB
 	private EmployeeService employeeService;
 	@EJB
@@ -34,10 +38,13 @@ public class ClockingHistoryBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
+		identityService = new IdentityService();
 		employeeService = new EmployeeService();
 		clockingService = new ClockingService();
-		identityEmployee = employeeService.getById(1L);
-		clockingEntryList = clockingService.getAllByEmployeeId(identityEmployee.getId());
+		identity = identityService.getLoggedUser();
+		Employee employee = identity.getEmployee();
+		clockingEntryList = clockingService.getAll();
+//		clockingEntryList = clockingService.getAllByEmployeeId(employee.getId());
 		System.out.println(ClockingHistoryBean.class.getName() + " init");
 	}
 

@@ -1,5 +1,7 @@
 package bean;
 
+import java.io.Serializable;
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -15,7 +17,12 @@ import service.IdentityService;
 @SuppressWarnings("deprecation")
 @ManagedBean
 @ViewScoped
-public class LoginBean {
+public class LoginBean implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private Identity identity;
 	private IdentityService userService;
@@ -46,9 +53,10 @@ public class LoginBean {
 			userService.setLoggedUser(identity);
 			return "clocking.xhtml?faces-redirect=true";
 		} else {
-			this.showMessage("Username or password incorrect!");
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error:", "Username or password incorrect"));
+			return "";
 		}
-		return "";
 	}
 
 	public void showMessage(String msg) {

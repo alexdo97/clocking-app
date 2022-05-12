@@ -7,6 +7,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -50,6 +51,12 @@ public class RegisterBean implements Serializable {
 			newEmployee.setIdentity(newIdentity);
 			employeeService.save(newEmployee);
 		}
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		Flash flash = facesContext.getExternalContext().getFlash();
+		flash.setKeepMessages(true);
+		facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Notice:",
+				"You successfully registered! You can now login"));
 
 		return "login.xhtml?faces-redirect=true";
 	}
