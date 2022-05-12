@@ -6,11 +6,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import model.Employee;
 import model.Identity;
@@ -46,7 +44,6 @@ public class RegisterBean implements Serializable {
 	public String validateRegistration() {
 		boolean validCredentials = validCredentials();
 		if (!validCredentials) {
-			// print error msgs
 			return "";
 		} else {
 			newIdentity.setPassword(DigestUtils.shaHex(newIdentity.getPassword()));
@@ -59,25 +56,28 @@ public class RegisterBean implements Serializable {
 
 	private boolean validCredentials() {
 		boolean validation = true;
+		Identity duplicateIdentity = null;
 
-		if (StringUtils.isBlank(newIdentity.getPassword())) {
-			// error
-			validation = false;
-		} else if (!newIdentity.getPassword().equals(confirmPassword)) {
-			// error
+		// validate password
+		if (!newIdentity.getPassword().equals(confirmPassword)) {
+			FacesContext.getCurrentInstance().addMessage("form:confirmPassword",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Passwords do not match"));
 			validation = false;
 		}
 
-		Identity duplicateIdentity = null;
+		// check if username is already being used
 		duplicateIdentity = identityService.findByUsername(newIdentity.getUsername());
 		if (duplicateIdentity != null) {
-			// error
+			FacesContext.getCurrentInstance().addMessage("form:username",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "This username is already being used"));
 			validation = false;
-		} else {
-			duplicateIdentity = identityService.findByEmail(newIdentity.getEmail());
 		}
+
+		// check if email address is already being used
+		duplicateIdentity = identityService.findByEmail(newIdentity.getEmail());
 		if (duplicateIdentity != null) {
-			// error
+			FacesContext.getCurrentInstance().addMessage("form:email",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "This email address is already being used"));
 			validation = false;
 		}
 
