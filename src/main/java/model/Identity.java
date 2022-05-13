@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -36,7 +35,7 @@ public class Identity {
 	private Integer profile;
 
 	@OneToOne(mappedBy = "identity", cascade = CascadeType.ALL)
-	@JoinColumn(name = "employee_id", referencedColumnName = "id")
+	@PrimaryKeyJoinColumn
 	private Employee employee;
 
 	@Transient
