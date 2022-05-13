@@ -43,7 +43,7 @@ public class Identity {
 	private Profile profileEnum;
 
 	public Identity() {
-		profile = 2;
+		profile = Profile.User.getCode();
 	}
 
 	public Integer getProfile() {
