@@ -9,7 +9,9 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import enums.ActionType;
@@ -45,12 +47,15 @@ public class ClockingBean implements Serializable {
 	@EJB
 	private IdentityService identityService;
 
+	@ManagedProperty(value = "#{sessionBean}")
+	private SessionBean sessionBean;
+
 	@PostConstruct
 	public void init() {
 		employeeService = new EmployeeService();
 		clockingService = new ClockingService();
 		identityService = new IdentityService();
-		identity = identityService.getById(Long.parseLong(SessionUtils.getIdentityId()));
+		identity = sessionBean.getIdentity();
 		lastClockingActions = clockingService.getLastActions(identity.getId());
 		System.out.println(ClockingBean.class.getName() + " init");
 	}
@@ -79,13 +84,6 @@ public class ClockingBean implements Serializable {
 		return clockingEntry;
 	}
 
-	// logout event, invalidate session
-	public String logout() {
-		HttpSession session = SessionUtils.getSession();
-		session.invalidate();
-		return "login.xhtml?faces-redirect=true";
-	}
-
 	// GETTERS AND SETTERS
 
 	public List<ClockingEntry> getLastClockingActions() {
@@ -102,6 +100,14 @@ public class ClockingBean implements Serializable {
 
 	public void setIdentity(Identity identity) {
 		this.identity = identity;
+	}
+
+	public SessionBean getSessionBean() {
+		return sessionBean;
+	}
+
+	public void setSessionBean(SessionBean sessionBean) {
+		this.sessionBean = sessionBean;
 	}
 
 }

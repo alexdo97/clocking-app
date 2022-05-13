@@ -12,10 +12,9 @@
 	<link rel="stylesheet" type="text/css" href="resources/css/style.css" />
 </h:head>
 
-
 <h:body>
+	<ui:include src="/template/header.xhtml" />
 	<h:form id="topForm">
-		<p:commandButton value="Logout" action="#{clockingBean.logout}" />
 		<p:panelGrid id="clocking">
 			<f:facet name="header">
 				<p:row>
@@ -59,9 +58,9 @@
 			<h:outputText
 				value="#{clockingBean.lastClockingActions.get(1).dateTime}" />
 
-
 		</p:panelGrid>
-
 	</h:form>
+	
+	<ui:include src="/template/footer.xhtml" />
 </h:body>
 </html>

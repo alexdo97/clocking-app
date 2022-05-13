@@ -21,9 +21,8 @@ public class SessionUtils {
 
 	public static String getIdentityId() {
 		HttpSession session = getSession();
-		if (session != null) {
+		if (session != null && session.getAttribute("identityId") != null) {
 			return session.getAttribute("identityId").toString();
-
 		} else {
 			return null;
 
