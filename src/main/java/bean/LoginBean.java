@@ -6,13 +6,14 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
 import model.Identity;
 import service.IdentityService;
+import util.SessionUtils;
 
 @SuppressWarnings("deprecation")
 @ManagedBean
@@ -34,13 +35,11 @@ public class LoginBean implements Serializable {
 		System.out.println(LoginBean.class.getName() + " init");
 	}
 
-	public String logOut() {
-
-		FacesContext context = FacesContext.getCurrentInstance();
-		ExternalContext externalContext = context.getExternalContext();
-		externalContext.getSessionMap().clear();
-
-		return "login.xhtml";
+	// logout event, invalidate session
+	public String logout() {
+		HttpSession session = SessionUtils.getSession();
+		session.invalidate();
+		return "login.xhtml?faces-redirect=true";
 	}
 
 	public String login() {
@@ -50,7 +49,8 @@ public class LoginBean implements Serializable {
 		if (checkedIdentity != null) {
 			identity = checkedIdentity;
 			identity.setPassword("");
-			userService.setLoggedUser(identity);
+			HttpSession session = SessionUtils.getSession();
+			session.setAttribute("identityId", identity.getId());
 			return "clocking.xhtml?faces-redirect=true";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null,

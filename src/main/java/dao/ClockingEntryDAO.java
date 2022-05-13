@@ -29,7 +29,7 @@ public class ClockingEntryDAO extends GenericDAO<ClockingEntry, Long> {
 		List<ClockingEntry> lastActions = new ArrayList<ClockingEntry>();
 		try {
 			entityManager.getTransaction().begin();
-			String sql = "from ClockingEntry where employee_id = :id order by date DESC, time DESC";
+			String sql = "from ClockingEntry where id = :id order by date DESC, time DESC";
 			TypedQuery<ClockingEntry> query = entityManager.createQuery(sql, ClockingEntry.class);
 			query.setParameter("id", id);
 			List<ClockingEntry> resultList = query.getResultList();

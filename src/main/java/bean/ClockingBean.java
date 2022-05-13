@@ -3,23 +3,22 @@ package bean;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import enums.ActionType;
 import model.ClockingEntry;
-import model.Employee;
 import model.Identity;
 import service.ClockingService;
 import service.EmployeeService;
 import service.IdentityService;
+import util.SessionUtils;
 
 @SuppressWarnings("deprecation")
 @ManagedBean
@@ -35,7 +34,7 @@ public class ClockingBean implements Serializable {
 
 	private List<ClockingEntry> lastClockingActions;
 
-	private Employee identityEmployee;
+	private Identity identity;
 
 	@EJB
 	private EmployeeService employeeService;
@@ -51,8 +50,8 @@ public class ClockingBean implements Serializable {
 		employeeService = new EmployeeService();
 		clockingService = new ClockingService();
 		identityService = new IdentityService();
-		identityEmployee = identityService.getLoggedUser().getEmployee();
-		lastClockingActions = clockingService.getLastActions(identityEmployee.getId());
+		identity = identityService.getById(Long.parseLong(SessionUtils.getIdentityId()));
+		lastClockingActions = clockingService.getLastActions(identity.getId());
 		System.out.println(ClockingBean.class.getName() + " init");
 	}
 
@@ -75,9 +74,16 @@ public class ClockingBean implements Serializable {
 	private ClockingEntry saveClockingEntry(ActionType action, LocalDateTime dateTime) {
 		String date = dateTime.toLocalDate().format(DTF_DATE);
 		String time = dateTime.toLocalTime().format(DTF_TIME);
-		ClockingEntry clockingEntry = new ClockingEntry(action.toString(), date, time, identityEmployee);
+		ClockingEntry clockingEntry = new ClockingEntry(action.toString(), date, time, identity.getEmployee());
 		clockingService.save(clockingEntry);
 		return clockingEntry;
+	}
+
+	// logout event, invalidate session
+	public String logout() {
+		HttpSession session = SessionUtils.getSession();
+		session.invalidate();
+		return "login.xhtml?faces-redirect=true";
 	}
 
 	// GETTERS AND SETTERS
@@ -90,12 +96,12 @@ public class ClockingBean implements Serializable {
 		this.lastClockingActions = lastClockingActions;
 	}
 
-	public Employee getIdentityEmployee() {
-		return identityEmployee;
+	public Identity getIdentity() {
+		return identity;
 	}
 
-	public void setIdentityEmployee(Employee identityEmployee) {
-		this.identityEmployee = identityEmployee;
+	public void setIdentity(Identity identity) {
+		this.identity = identity;
 	}
 
 }

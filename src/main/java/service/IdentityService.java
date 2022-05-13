@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import dao.IdentityDAO;
 import model.Identity;
@@ -43,12 +44,5 @@ public class IdentityService {
 		Identity loggedUser = (Identity) externalContext.getSessionMap().get("loggedUser");
 
 		return loggedUser;
-	}
-
-	public void setLoggedUser(Identity identity) {
-
-		FacesContext context = FacesContext.getCurrentInstance();
-		ExternalContext externalContext = context.getExternalContext();
-		externalContext.getSessionMap().put("loggedUser", identity);
 	}
 }
