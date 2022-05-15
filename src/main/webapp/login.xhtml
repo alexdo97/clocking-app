@@ -14,22 +14,24 @@
 </h:head>
 <h:body>
 	<ui:include src="/template/header.xhtml" />
-	<p:messages id="messages" showDetail="true" closable="true">
-		<p:autoUpdate />
-	</p:messages>
+	<h:form id="form">
+		<p:messages id="messages" showDetail="true" closable="true">
+			<p:autoUpdate />
+		</p:messages>
 
-	<p:ajaxStatus onstart="PF('statusDialog').show()"
-		onsuccess="PF('statusDialog').hide()" />
+		<p:ajaxStatus onstart="PF('statusDialog').show()"
+			onsuccess="PF('statusDialog').hide()" />
 
-	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
-		closable="false" resizable="false" showHeader="false">
-		<p:graphicImage name="images/ajaxloadingbar.gif" />
-	</p:dialog>
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false">
+			<p:graphicImage name="images/ajaxloadingbar.gif" />
+		</p:dialog>
 
-	<p:panel id="login-panel">
-		<p:outputLabel value="Login" class="login-title" />
+		<p:panel class="login-panel">
+			<f:facet name="header">
+				<p:outputLabel value="Login" class="login-title" />
+			</f:facet>
 
-		<h:form id="form">
 			<span class="ui-float-label input-span"> <p:inputText
 					value="#{loginBean.identity.username}" class="input-item" /> <p:outputLabel
 					value="Username" />
@@ -45,10 +47,7 @@
 				update="form" action="#{loginBean.login}" class="btn" />
 			<p:commandButton value="Register" icon="fa fa-fw fa-user-secret"
 				action="register.xhtml?faces-redirect=true" class="btn register-btn" />
-		</h:form>
-
-	</p:panel>
-
-	<ui:include src="/template/footer.xhtml" />
+		</p:panel>
+	</h:form>
 </h:body>
 </html>
