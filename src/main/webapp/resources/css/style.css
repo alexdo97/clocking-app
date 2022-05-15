@@ -58,6 +58,8 @@ td.ui-panelgrid-cell {
 }
 
 .ui-widget.login-title {
+	margin-top: 1rem;
+	margin-bottom: 3rem;
 	display: block;
 	text-align: center;
 	font-size: 2rem;
