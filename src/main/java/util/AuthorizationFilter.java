@@ -33,12 +33,18 @@ public class AuthorizationFilter implements Filter {
 			HttpSession ses = reqt.getSession(false);
 
 			String reqURI = reqt.getRequestURI();
-			if (reqURI.indexOf("/login.xhtml") >= 0 || reqURI.indexOf("register.xhtml") >= 0
-					|| (ses != null && ses.getAttribute("identityId") != null)
-					|| reqURI.contains("javax.faces.resource"))
+
+			boolean activeSession = ses != null && ses.getAttribute("identityId") != null;
+			boolean loginOrRegistrationURL = reqURI.indexOf("/login.xhtml") >= 0
+					|| reqURI.indexOf("/register.xhtml") >= 0;
+
+			if (activeSession && loginOrRegistrationURL) {
+				resp.sendRedirect(reqt.getContextPath() + "/clocking.xhtml");
+			} else if (loginOrRegistrationURL || activeSession) {
 				chain.doFilter(request, response);
-			else
+			} else {
 				resp.sendRedirect(reqt.getContextPath() + "/login.xhtml");
+			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
