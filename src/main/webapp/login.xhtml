@@ -9,13 +9,13 @@
 
 <h:head>
 	<title>Login</title>
-	<link rel="stylesheet" type="text/css" href="resources/css/style.css" />
 </h:head>
 <h:body>
-
 	<ui:include src="/template/header.xhtml" />
-	<div class="center" id="content">
-
+	<p:messages id="messages" showDetail="true" closable="true">
+		<p:autoUpdate />
+	</p:messages>
+	<div class="login-container" id="content">
 		<p:ajaxStatus onstart="PF('statusDialog').show()"
 			onsuccess="PF('statusDialog').hide()" />
 
@@ -23,40 +23,30 @@
 			closable="false" resizable="false" showHeader="false">
 			<p:graphicImage name="images/ajaxloadingbar.gif" />
 		</p:dialog>
+		
+		<div id="login-form-container">
+			<p:outputLabel value="Login" class="login-title" />
 
-		<h:form id="form">
+			<h:form id="form">
+				<span class="ui-float-label input-span"> <p:inputText
+						value="#{loginBean.identity.username}" class="input-item" /> <p:outputLabel
+						value="Username" />
+				</span>
 
-			<p:messages id="messages" showDetail="true" closable="true">
-				<p:autoUpdate />
-			</p:messages>
+				<span class="ui-float-label input-span"> <p:inputText
+						type="password" value="#{loginBean.identity.password}"
+						width="100px" class="input-item" /> <p:outputLabel
+						value="Password" />
+				</span>
+				
+				<p:commandButton value="Sign in" icon="fa fa-fw fa-user-secret"
+					update="form" action="#{loginBean.login}" class="btn" />
+				<p:commandButton value="Register" icon="fa fa-fw fa-user-secret"
+					action="register.xhtml?faces-redirect=true"
+					class="btn register-btn" />
+			</h:form>
 
-			<p:panelGrid columns="2">
-
-				<p:column>
-					<p:outputLabel value="Name" />
-				</p:column>
-				<p:column>
-					<p:inputText value="#{loginBean.identity.username}" />
-				</p:column>
-
-				<p:column>
-					<p:outputLabel value="Password" />
-				</p:column>
-				<p:column>
-					<p:inputText type="password" value="#{loginBean.identity.password}" />
-				</p:column>
-				<p:column>
-					<p:commandButton value="OK" icon="fa fa-fw fa-user-secret"
-						update="form" action="#{loginBean.login}" />
-				</p:column>
-				<p:column>
-					<p:commandButton value="REGISTER" icon="fa fa-fw fa-user-secret"
-						action="register.xhtml?faces-redirect=true" />
-
-				</p:column>
-			</p:panelGrid>
-
-		</h:form>
+		</div>
 	</div>
 	<ui:include src="/template/footer.xhtml" />
 </h:body>

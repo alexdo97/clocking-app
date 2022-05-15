@@ -13,84 +13,89 @@
 </h:head>
 <h:body>
 	<ui:include src="/template/header.xhtml" />
-	<div class="center" id="content">
 
+	<div class="register-container" id="content">
 		<p:ajaxStatus onstart="PF('statusDialog').show()"
 			onsuccess="PF('statusDialog').hide()" />
-
 
 		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
 			closable="false" resizable="false" showHeader="false">
 			<p:graphicImage name="images/ajaxloadingbar.gif" />
 		</p:dialog>
+		<div id="register-form-container">
+			<p:outputLabel value="Register" class="register-title" />
+			<h:form id="form">
 
-		<h:form id="form">
+				<p:panelGrid id="grid" columns="3" cellpadding="7"
+					styleClass="p-mb-3" class="register-grid">
 
-			<p:panelGrid id="grid" columns="3" cellpadding="7"
-				styleClass="p-mb-3">
+					<p:outputLabel for="firstName" value="First Name:" />
+					<p:inputText id="firstName"
+						value="#{registerBean.newEmployee.firstName}" required="true"
+						validatorMessage="First Name: length should be minimum 2 characters">
+						<f:validateLength minimum="2" />
+						<p:ajax update="msgFirstName" event="blur" global="false" />
+					</p:inputText>
+					<p:message for="firstName" id="msgFirstName" showSummary="false" />
 
-				<p:outputLabel for="firstName" value="First Name:" />
-				<p:inputText id="firstName"
-					value="#{registerBean.newEmployee.firstName}" required="true"
-					validatorMessage="First Name: length should be minimum 2 characters">
-					<f:validateLength minimum="2" />
-					<p:ajax update="msgFirstName" event="blur" global="false" />
-				</p:inputText>
-				<p:message for="firstName" id="msgFirstName" showSummary="false" />
+					<p:outputLabel for="lastName" value="Last Name:" />
+					<p:inputText id="lastName"
+						value="#{registerBean.newEmployee.lastName}" required="true"
+						validatorMessage="Last Name: length should be minimum 2 characters">
+						<f:validateLength minimum="2" />
+						<p:ajax update="msgLastName" event="blur" global="false" />
+					</p:inputText>
+					<p:message for="lastName" id="msgLastName" />
 
-				<p:outputLabel for="lastName" value="Last Name:" />
-				<p:inputText id="lastName"
-					value="#{registerBean.newEmployee.lastName}" required="true"
-					validatorMessage="Last Name: length should be minimum 2 characters">
-					<f:validateLength minimum="2" />
-					<p:ajax update="msgLastName" event="blur" global="false" />
-				</p:inputText>
-				<p:message for="lastName" id="msgLastName" />
+					<p:outputLabel for="email" value="Email address:" />
+					<p:inputText id="email" value="#{registerBean.newIdentity.email}"
+						required="true"
+						validatorMessage="Email address: is not a valid email">
+						<f:validateRegex
+							pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+						<p:ajax update="msgEmail" event="blur" global="false" />
+					</p:inputText>
+					<p:message for="email" id="msgEmail" />
 
-				<p:outputLabel for="email" value="Email address:" />
-				<p:inputText id="email" value="#{registerBean.newIdentity.email}"
-					required="true"
-					validatorMessage="Email address: is not a valid email">
-					<f:validateRegex
-						pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
-					<p:ajax update="msgEmail" event="blur" global="false" />
-				</p:inputText>
-				<p:message for="email" id="msgEmail" />
+					<p:outputLabel for="username" value="Username:" />
+					<p:inputText id="username"
+						value="#{registerBean.newIdentity.username}" required="true"
+						validatorMessage="Username: length should be minimum 2 characters">
+						<f:validateLength minimum="2" />
+						<p:ajax update="msgUsername" event="blur" global="false" />
+					</p:inputText>
+					<p:message for="username" id="msgUsername" />
 
-				<p:outputLabel for="username" value="Username:" />
-				<p:inputText id="username"
-					value="#{registerBean.newIdentity.username}" required="true"
-					validatorMessage="Username: length should be minimum 2 characters">
-					<f:validateLength minimum="2" />
-					<p:ajax update="msgUsername" event="blur" global="false" />
-				</p:inputText>
-				<p:message for="username" id="msgUsername" />
+					<p:outputLabel for="password" value="Password:" />
+					<p:inputText id="password" type="password"
+						value="#{registerBean.newIdentity.password}" required="true"
+						validatorMessage="Password: spaces are not allowed and length should be minimum 5 characters">
+						<f:validateLength minimum="5" />
+						<f:validateRegex pattern="^\S*$" />
+						<p:ajax update="msgPassword" event="blur" global="false" />
+					</p:inputText>
+					<p:message for="password" id="msgPassword" />
 
-				<p:outputLabel for="password" value="Password:" />
-				<p:inputText id="password" type="password"
-					value="#{registerBean.newIdentity.password}" required="true"
-					validatorMessage="Password: spaces are not allowed and length should be minimum 5 characters">
-					<f:validateLength minimum="5" />
-					<f:validateRegex pattern="^\S*$" />
-					<p:ajax update="msgPassword" event="blur" global="false" />
-				</p:inputText>
-				<p:message for="password" id="msgPassword" />
+					<p:outputLabel for="confirmPassword" value="Confirm Password:" />
+					<p:inputText id="confirmPassword" type="password"
+						value="#{registerBean.confirmPassword}" required="true"
+						validatorMessage="Confirm Password: spaces are not allowed and length should be minimum 5 characters">
+						<f:validateLength minimum="5" />
+						<f:validateRegex pattern="^\S*$" />
+						<p:ajax update="msgConfirmPassword" event="blur" global="false" />
+					</p:inputText>
+					<p:message for="form:confirmPassword" id="msgConfirmPassword" />
+				</p:panelGrid>
 
-				<p:outputLabel for="confirmPassword" value="Confirm Password:" />
-				<p:inputText id="confirmPassword" type="password"
-					value="#{registerBean.confirmPassword}" required="true"
-					validatorMessage="Confirm Password: spaces are not allowed and length should be minimum 5 characters">
-					<f:validateLength minimum="5" />
-					<f:validateRegex pattern="^\S*$" />
-					<p:ajax update="msgConfirmPassword" event="blur" global="false" />
-				</p:inputText>
-				<p:message for="form:confirmPassword" id="msgConfirmPassword" />
+				<p:commandButton value="Sign up" class="signup-btn btn"
+					icon="fa fa-fw fa-user-secret" update="form"
+					action="#{registerBean.validateRegistration}" />
 
-				<p:commandButton value="OK" icon="fa fa-fw fa-user-secret"
-					update="form" action="#{registerBean.validateRegistration}" />
-			</p:panelGrid>
-
-		</h:form>
+				<p:commandButton value="Back to Login" class="back-login-btn btn"
+					icon="fa fa-fw fa-user-secret" update="form"
+					action="login.xhtml?faces-redirect=true" />
+			</h:form>
+		</div>
 	</div>
 	<ui:include src="/template/footer.xhtml" />
 </h:body>

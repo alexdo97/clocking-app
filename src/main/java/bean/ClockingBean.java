@@ -8,9 +8,11 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import enums.ActionType;
 import model.ClockingEntry;
@@ -58,6 +60,11 @@ public class ClockingBean implements Serializable {
 	}
 
 	public void onPunchIn() {
+		if (lastClockingActions.get(0).getPunchType().equals(ActionType.PUNCH_IN.toString())) {
+			FacesContext.getCurrentInstance().addMessage("msgs", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning:",
+					"You have to Punch out your previous action before Punching In again"));
+			return;
+		}
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		ClockingEntry newClockingEntry = saveClockingEntry(ActionType.PUNCH_IN, currentDateTime);
 		ClockingEntry auxClockingAction = lastClockingActions.get(0);
@@ -66,6 +73,11 @@ public class ClockingBean implements Serializable {
 	}
 
 	public void onPunchOut() {
+		if (lastClockingActions.get(0).getPunchType().equals(ActionType.PUNCH_OUT.toString())) {
+			FacesContext.getCurrentInstance().addMessage("msgs", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning:",
+					"You have to Punch in before Punching Out again"));
+			return;
+		}
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		ClockingEntry newClockingEntry = saveClockingEntry(ActionType.PUNCH_OUT, currentDateTime);
 		ClockingEntry auxClockingAction = lastClockingActions.get(0);

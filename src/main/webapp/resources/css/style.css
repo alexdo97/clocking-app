@@ -10,7 +10,7 @@ body {
 }
 
 #top-header {
-	background: linear-gradient(to right, #7096ab, #85b2cb 40%);
+	background: #449BCD;
 	border-bottom: 1px solid #85b2cb;
 	color: white;
 	font-family: sans-serif;
@@ -50,10 +50,87 @@ body {
 	font-family: sans-serif;
 }
 
-#form_login {
+#top-menu .ui-menuitem.ui-widget.ui-corner-all:last-child {
+	float: right;
+}
+
+td.ui-panelgrid-cell {
+	border: none !important;
+}
+
+.login-container {
 	display: block;
-	margin: 0 auto;
-	width: 560px;
+	width: 370px;
+	height: 370px;
 	padding: 10px;
-	margin-top: 150px;
+	margin: 10% auto 10% auto;
+}
+
+.register-container {
+	display: block;
+	width: 50%;
+	height: 50vh;
+	margin: 5% auto 10% auto;
+}
+
+#register-form-container {
+	width: 800px;
+	margin: 0 auto;
+	margin-top: 5.5rem;
+	padding: 0.5rem;
+}
+
+#login-form-container {
+	width: 300px;
+	margin: 0 auto;
+	margin-top: 1.5rem;
+}
+
+.ui-widget.login-title {
+	margin-bottom: 5rem;
+	display: block;
+	text-align: center;
+	font-size: 2rem;
+	font-weight: 600;
+}
+
+.ui-widget.register-title {
+	margin-top: 3rem;
+	margin-bottom: 6rem;
+	display: block;
+	text-align: center;
+	font-size: 2rem;
+	font-weight: 600;
+}
+
+.input-span {
+	margin-bottom: 2rem;
+}
+
+.input-item {
+	width: 100%;
+}
+
+.register-btn {
+	float: right;
+}
+
+.signup-btn {
+	float: left;
+}
+
+.register-grid {
+	margin-bottom: 6rem;
+}
+
+.back-login-btn {
+	float: right;
+}
+
+.ui-button-text {
+	padding: 0.5rem 1rem !important;
+}
+
+.btn {
+	width: 35%;
 }

@@ -15,40 +15,42 @@
 
 <h:body>
 	<ui:include src="/template/header.xhtml" />
-	<h:form id="topForm">
-		<p:dataTable var="row"
-			value="#{clockingHistoryBean.clockingEntryList}" lazy="false">
-			<p:column headerText="Id" styleClass="" filterBy="#{row.id}"
-				filterMatchMode="contains">
-				<h:outputText value="#{row.id}" />
-			</p:column>
+	<div class="center" id="content">
+		<h:form id="topForm">
+			<p:dataTable var="row"
+				value="#{clockingHistoryBean.clockingEntryList}" lazy="false">
+				<p:column headerText="Id" styleClass="" filterBy="#{row.id}"
+					filterMatchMode="contains">
+					<h:outputText value="#{row.id}" />
+				</p:column>
 
-			<p:column headerText="Last Name" styleClass=""
-				filterBy="#{row.lastName}" filterMatchMode="contains">
-				<h:outputText value="#{row.employee.lastName}" />
-			</p:column>
+				<p:column headerText="Last Name" styleClass=""
+					filterBy="#{row.lastName}" filterMatchMode="contains">
+					<h:outputText value="#{row.employee.lastName}" />
+				</p:column>
 
-			<p:column headerText="First Name" styleClass=""
-				filterBy="#{row.firstName}" filterMatchMode="contains">
-				<h:outputText value="#{row.employee.firstName}" />
-			</p:column>
+				<p:column headerText="First Name" styleClass=""
+					filterBy="#{row.firstName}" filterMatchMode="contains">
+					<h:outputText value="#{row.employee.firstName}" />
+				</p:column>
 
-			<p:column headerText="Punch type" styleClass=""
-				filterBy="#{row.punchType}" filterMatchMode="contains">
-				<h:outputText value="#{row.punchType}" />
-			</p:column>
+				<p:column headerText="Punch type" styleClass=""
+					filterBy="#{row.punchType}" filterMatchMode="contains">
+					<h:outputText value="#{row.punchType}" />
+				</p:column>
 
-			<p:column headerText="Date" styleClass="" filterBy="#{row.date}"
-				filterMatchMode="contains">
-				<h:outputText value="#{row.date}" />
-			</p:column>
+				<p:column headerText="Date" styleClass="" filterBy="#{row.date}"
+					filterMatchMode="contains">
+					<h:outputText value="#{row.date}" />
+				</p:column>
 
-			<p:column headerText="Time" styleClass="" filterBy="#{row.time}"
-				filterMatchMode="contains">
-				<h:outputText value="#{row.time}" />
-			</p:column>
-		</p:dataTable>
-	</h:form>
+				<p:column headerText="Time" styleClass="" filterBy="#{row.time}"
+					filterMatchMode="contains">
+					<h:outputText value="#{row.time}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</div>
 	<ui:include src="/template/footer.xhtml" />
 </h:body>
 </html>

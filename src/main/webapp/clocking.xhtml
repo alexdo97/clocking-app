@@ -14,53 +14,57 @@
 
 <h:body>
 	<ui:include src="/template/header.xhtml" />
-	<h:form id="topForm">
-		<p:panelGrid id="clocking">
-			<f:facet name="header">
+	<div class="center" id="content">
+		<p:messages id="msgs" showDetail="true" closable="true">
+			<p:autoUpdate />
+		</p:messages>
+		<h:form id="topForm">
+			<p:panelGrid id="clocking">
+				<f:facet name="header">
+					<p:row>
+						<p:column colspan="2">Clocking</p:column>
+					</p:row>
+					<p:row>
+						<p:column colspan="2">
+							<h:outputText value="Local date time: " />
+							<p:clock pattern="dd-MM-yyyy HH:mm:ss" mode="server" />
+						</p:column>
+					</p:row>
+				</f:facet>
 				<p:row>
-					<p:column colspan="2">Clocking</p:column>
-				</p:row>
-				<p:row>
-					<p:column colspan="2">
-						<h:outputText value="Local date time: " />
-						<p:clock pattern="dd-MM-yyyy HH:mm:ss" mode="server" />
+					<p:column>
+						<p:commandButton value="Punch in"
+							styleClass="centeredColumnContent"
+							action="#{clockingBean.onPunchIn}" update="topForm:lastActions" />
+					</p:column>
+					<p:column>
+						<p:commandButton value="Punch out"
+							styleClass="centeredColumnContent"
+							action="#{clockingBean.onPunchOut}" update="topForm:lastActions" />
 					</p:column>
 				</p:row>
-			</f:facet>
-			<p:row>
-				<p:column>
-					<p:commandButton value="Punch in"
-						styleClass="centeredColumnContent"
-						action="#{clockingBean.onPunchIn}" update="topForm:lastActions" />
-				</p:column>
-				<p:column>
-					<p:commandButton value="Punch out"
-						styleClass="centeredColumnContent"
-						action="#{clockingBean.onPunchOut}" update="topForm:lastActions" />
-				</p:column>
-			</p:row>
-		</p:panelGrid>
+			</p:panelGrid>
 
-		<p:panelGrid id="lastActions" columns="2">
-			<f:facet name="header">
-				<p:row>
-					<p:column colspan="2">Last Actions</p:column>
-				</p:row>
-			</f:facet>
+			<p:panelGrid id="lastActions" columns="2">
+				<f:facet name="header">
+					<p:row>
+						<p:column colspan="2">Last Actions</p:column>
+					</p:row>
+				</f:facet>
 
-			<h:outputText
-				value="#{clockingBean.lastClockingActions.get(0).punchType}" />
-			<h:outputText
-				value="#{clockingBean.lastClockingActions.get(0).dateTime}" />
+				<h:outputText
+					value="#{clockingBean.lastClockingActions.get(0).punchType}" />
+				<h:outputText
+					value="#{clockingBean.lastClockingActions.get(0).dateTime}" />
 
-			<h:outputText
-				value="#{clockingBean.lastClockingActions.get(1).punchType}" />
-			<h:outputText
-				value="#{clockingBean.lastClockingActions.get(1).dateTime}" />
+				<h:outputText
+					value="#{clockingBean.lastClockingActions.get(1).punchType}" />
+				<h:outputText
+					value="#{clockingBean.lastClockingActions.get(1).dateTime}" />
 
-		</p:panelGrid>
-	</h:form>
-	
+			</p:panelGrid>
+		</h:form>
+	</div>
 	<ui:include src="/template/footer.xhtml" />
 </h:body>
 </html>
