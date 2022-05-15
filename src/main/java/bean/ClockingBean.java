@@ -11,8 +11,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
 
 import enums.ActionType;
 import model.ClockingEntry;
@@ -20,7 +18,6 @@ import model.Identity;
 import service.ClockingService;
 import service.EmployeeService;
 import service.IdentityService;
-import util.SessionUtils;
 
 @SuppressWarnings("deprecation")
 @ManagedBean
