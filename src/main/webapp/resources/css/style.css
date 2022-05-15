@@ -9,51 +9,6 @@ body {
 	margin: 0;
 }
 
-#top-header {
-	background: #449BCD;
-	border-bottom: 1px solid #85b2cb;
-	color: white;
-	font-family: sans-serif;
-	padding: 5px;
-	height: 90px;
-}
-
-#header-logo {
-	width: 198px;
-	height: 68px;
-	position: absolute;
-	left: 12px;
-	top: 12px;
-}
-
-#header-info {
-	width: 230px;
-	height: 65px;
-	position: absolute;
-	right: 12px;
-	top: 12px;
-}
-
-.center {
-	display: block;
-	margin: 0 auto;
-	width: 960px;
-	padding: 10px;
-}
-
-#content {
-	background-color: white;
-}
-
-#footer {
-	text-align: center;
-	font-family: sans-serif;
-}
-
-#top-menu .ui-menuitem.ui-widget.ui-corner-all:last-child {
-	float: right;
-}
-
 td.ui-panelgrid-cell {
 	border: none !important;
 }
@@ -73,6 +28,14 @@ td.ui-panelgrid-cell {
 	margin: 5% auto 10% auto;
 }
 
+#register-panel {
+	display: block;
+	width: 45%;
+	height: 60vh;
+	padding: 10px;
+	margin: 5% auto 10% auto;
+}
+
 #register-form-container {
 	width: 800px;
 	margin: 0 auto;
@@ -86,6 +49,14 @@ td.ui-panelgrid-cell {
 	margin-top: 1.5rem;
 }
 
+#login-panel {
+	display: block;
+	width: 370px;
+	height: 370px;
+	padding: 10px;
+	margin: 10% auto 10% auto;
+}
+
 .ui-widget.login-title {
 	margin-bottom: 5rem;
 	display: block;
@@ -94,9 +65,16 @@ td.ui-panelgrid-cell {
 	font-weight: 600;
 }
 
+.register-grid {
+	width: 50%;
+	height: 370px;
+	padding: 10px;
+	margin: 5% auto 10% auto;
+}
+
 .ui-widget.register-title {
-	margin-top: 3rem;
-	margin-bottom: 6rem;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
 	display: block;
 	text-align: center;
 	font-size: 2rem;
@@ -117,10 +95,6 @@ td.ui-panelgrid-cell {
 
 .signup-btn {
 	float: left;
-}
-
-.register-grid {
-	margin-bottom: 6rem;
 }
 
 .back-login-btn {

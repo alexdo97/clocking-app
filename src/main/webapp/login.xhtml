@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -9,45 +10,45 @@
 
 <h:head>
 	<title>Login</title>
+	<link rel="stylesheet" type="text/css" href="resources/css/style.css" />
 </h:head>
 <h:body>
 	<ui:include src="/template/header.xhtml" />
 	<p:messages id="messages" showDetail="true" closable="true">
 		<p:autoUpdate />
 	</p:messages>
-	<div class="login-container" id="content">
-		<p:ajaxStatus onstart="PF('statusDialog').show()"
-			onsuccess="PF('statusDialog').hide()" />
 
-		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
-			closable="false" resizable="false" showHeader="false">
-			<p:graphicImage name="images/ajaxloadingbar.gif" />
-		</p:dialog>
-		
-		<div id="login-form-container">
-			<p:outputLabel value="Login" class="login-title" />
+	<p:ajaxStatus onstart="PF('statusDialog').show()"
+		onsuccess="PF('statusDialog').hide()" />
 
-			<h:form id="form">
-				<span class="ui-float-label input-span"> <p:inputText
-						value="#{loginBean.identity.username}" class="input-item" /> <p:outputLabel
-						value="Username" />
-				</span>
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+		closable="false" resizable="false" showHeader="false">
+		<p:graphicImage name="images/ajaxloadingbar.gif" />
+	</p:dialog>
 
-				<span class="ui-float-label input-span"> <p:inputText
-						type="password" value="#{loginBean.identity.password}"
-						width="100px" class="input-item" /> <p:outputLabel
-						value="Password" />
-				</span>
-				
-				<p:commandButton value="Sign in" icon="fa fa-fw fa-user-secret"
-					update="form" action="#{loginBean.login}" class="btn" />
-				<p:commandButton value="Register" icon="fa fa-fw fa-user-secret"
-					action="register.xhtml?faces-redirect=true"
-					class="btn register-btn" />
-			</h:form>
+	<p:panel id="login-panel">
+		<p:outputLabel value="Login" class="login-title" />
 
-		</div>
-	</div>
+		<h:form id="form">
+			<span class="ui-float-label input-span"> <p:inputText
+					value="#{loginBean.identity.username}" class="input-item" /> <p:outputLabel
+					value="Username" />
+			</span>
+
+			<span class="ui-float-label input-span"> <p:inputText
+					type="password" value="#{loginBean.identity.password}"
+					width="100px" class="input-item" /> <p:outputLabel
+					value="Password" />
+			</span>
+
+			<p:commandButton value="Sign in" icon="fa fa-fw fa-user-secret"
+				update="form" action="#{loginBean.login}" class="btn" />
+			<p:commandButton value="Register" icon="fa fa-fw fa-user-secret"
+				action="register.xhtml?faces-redirect=true" class="btn register-btn" />
+		</h:form>
+
+	</p:panel>
+
 	<ui:include src="/template/footer.xhtml" />
 </h:body>
 </html>

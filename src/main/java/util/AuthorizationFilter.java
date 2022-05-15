@@ -36,7 +36,7 @@ public class AuthorizationFilter implements Filter {
 
 			boolean activeSession = ses != null && ses.getAttribute("identityId") != null;
 			boolean loginOrRegistrationURL = reqURI.indexOf("/login.xhtml") >= 0
-					|| reqURI.indexOf("/register.xhtml") >= 0;
+					|| reqURI.indexOf("/register.xhtml") >= 0 || reqURI.contains("javax.faces.resource");
 
 			if (activeSession && loginOrRegistrationURL) {
 				resp.sendRedirect(reqt.getContextPath() + "/clocking.xhtml");
