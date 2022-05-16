@@ -21,9 +21,11 @@ public class SessionBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	private Identity identity;
 	private IdentityService identityService;
 	private String welcomeMessage;
+	private boolean activeSession;
 
 	@PostConstruct
 	public void init() {
@@ -38,9 +40,14 @@ public class SessionBean implements Serializable {
 		return "login.xhtml?faces-redirect=true";
 	}
 
-	// GETTERS AND SETTERS
-
 	public String getWelcomeMessage() {
+
+		if (SessionUtils.getIdentityId() != null) {
+			activeSession = true;
+		} else {
+			activeSession = false;
+		}
+
 		if (SessionUtils.getIdentityId() != null) {
 			identity = identityService.getById(Long.parseLong(SessionUtils.getIdentityId()));
 			welcomeMessage = "Welcome, " + identity.getUsername() + "!";
@@ -50,6 +57,7 @@ public class SessionBean implements Serializable {
 		return welcomeMessage;
 	}
 
+	// GETTERS AND SETTERS
 	public void setWelcomeMessage(String welcomeMessage) {
 
 		this.welcomeMessage = welcomeMessage;
@@ -61,5 +69,13 @@ public class SessionBean implements Serializable {
 
 	public void setIdentity(Identity identity) {
 		this.identity = identity;
+	}
+
+	public boolean isActiveSession() {
+		return activeSession;
+	}
+
+	public void setActiveSession(boolean activeSession) {
+		this.activeSession = activeSession;
 	}
 }

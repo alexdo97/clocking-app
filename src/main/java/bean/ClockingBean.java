@@ -7,7 +7,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -18,8 +17,6 @@ import enums.ActionType;
 import model.ClockingEntry;
 import model.Identity;
 import service.ClockingService;
-import service.EmployeeService;
-import service.IdentityService;
 
 @SuppressWarnings("deprecation")
 @ManagedBean
@@ -37,23 +34,14 @@ public class ClockingBean implements Serializable {
 
 	private Identity identity;
 
-	@EJB
-	private EmployeeService employeeService;
-
-	@EJB
 	private ClockingService clockingService;
-
-	@EJB
-	private IdentityService identityService;
 
 	@ManagedProperty(value = "#{sessionBean}")
 	private SessionBean sessionBean;
 
 	@PostConstruct
 	public void init() {
-		employeeService = new EmployeeService();
 		clockingService = new ClockingService();
-		identityService = new IdentityService();
 		identity = sessionBean.getIdentity();
 		lastClockingActions = clockingService.getLastActions(identity.getId());
 		System.out.println(ClockingBean.class.getName() + " init");

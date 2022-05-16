@@ -16,6 +16,11 @@
 <h:body>
 	<ui:include src="/template/header.xhtml" />
 	<h:form id="topForm">
+		<p:messages id="messages" class="messages" showDetail="true"
+			closable="true">
+			<p:autoUpdate />
+		</p:messages>
+
 		<p:panel class="clocking-history-panel">
 			<p:outputLabel value="Clocking History" class="clocking-title" />
 			<p:dataTable var="row" widgetVar="entriesTable"

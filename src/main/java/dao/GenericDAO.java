@@ -9,7 +9,7 @@ import javax.persistence.EntityManagerFactory;
 
 import org.hibernate.Session;
 
-import util.Util;
+import util.FactoryUtils;
 
 public class GenericDAO<T, PK extends Serializable> {
 
@@ -22,7 +22,7 @@ public class GenericDAO<T, PK extends Serializable> {
 	@SuppressWarnings("unchecked")
 	public GenericDAO() {
 
-		entityManager = Util.getEntityManager();
+		entityManager = FactoryUtils.getEntityManager();
 		ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
 
 		this.entityClass = ((Class<T>) genericSuperclass.getActualTypeArguments()[0]);

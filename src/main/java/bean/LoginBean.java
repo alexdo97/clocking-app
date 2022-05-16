@@ -26,11 +26,11 @@ public class LoginBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Identity identity;
-	private IdentityService userService;
+	private IdentityService identityService;
 
 	@PostConstruct
 	public void init() {
-		userService = new IdentityService();
+		identityService = new IdentityService();
 		identity = new Identity();
 		System.out.println(LoginBean.class.getName() + " init");
 	}
@@ -43,7 +43,7 @@ public class LoginBean implements Serializable {
 	}
 
 	public String login() {
-		Identity checkedIdentity = userService.findByUsernamePassword(this.identity.getUsername(),
+		Identity checkedIdentity = identityService.findByUsernamePassword(this.identity.getUsername(),
 				DigestUtils.shaHex(identity.getPassword()));
 
 		if (checkedIdentity != null) {

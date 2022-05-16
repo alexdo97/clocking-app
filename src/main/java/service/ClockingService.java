@@ -1,12 +1,10 @@
 package service;
 
 import java.util.List;
-import javax.ejb.Stateless;
 
 import dao.ClockingEntryDAO;
 import model.ClockingEntry;
 
-@Stateless
 public class ClockingService {
 
 	private ClockingEntryDAO dao;

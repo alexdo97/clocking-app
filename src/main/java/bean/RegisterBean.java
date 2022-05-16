@@ -43,7 +43,9 @@ public class RegisterBean implements Serializable {
 	}
 
 	public String validateRegistration() {
+
 		boolean validCredentials = validCredentials();
+
 		if (!validCredentials) {
 			return "";
 		} else {
@@ -64,7 +66,7 @@ public class RegisterBean implements Serializable {
 	private boolean validCredentials() {
 		boolean validation = true;
 		Identity duplicateIdentity = null;
-		
+
 		// validate password
 		if (!newIdentity.getPassword().equals(confirmPassword)) {
 			FacesContext.getCurrentInstance().addMessage("form:confirmPassword",

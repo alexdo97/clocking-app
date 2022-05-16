@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -15,8 +14,7 @@ import enums.Role;
 import model.ClockingEntry;
 import model.Identity;
 import service.ClockingService;
-import service.IdentityService;
-import util.EnumUtil;
+import util.EnumUtils;
 
 @SuppressWarnings("deprecation")
 @ManagedBean
@@ -34,9 +32,6 @@ public class ClockingHistoryBean implements Serializable {
 	private String[] actionTypes;
 	private String[] roles;
 
-	@EJB
-	private IdentityService identityService;
-	@EJB
 	private ClockingService clockingService;
 
 	@ManagedProperty(value = "#{sessionBean}")
@@ -44,12 +39,13 @@ public class ClockingHistoryBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		identityService = new IdentityService();
+
 		clockingService = new ClockingService();
 		identity = sessionBean.getIdentity();
-		actionTypes = EnumUtil.getNames(ActionType.class);
-		roles = EnumUtil.getNames(Role.class);
+		actionTypes = EnumUtils.getNames(ActionType.class);
+		roles = EnumUtils.getNames(Role.class);
 		adminRole = identity.getRole().equals(Role.Admin.toString());
+
 		if (adminRole) {
 			clockingEntryList = clockingService.getAll();
 		} else {

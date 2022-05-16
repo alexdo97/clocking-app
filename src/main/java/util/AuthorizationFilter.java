@@ -38,14 +38,14 @@ public class AuthorizationFilter implements Filter {
 			boolean loginOrRegistrationURL = reqURI.indexOf("/login.xhtml") >= 0
 					|| reqURI.indexOf("/register.xhtml") >= 0;
 
-			if (loginOrRegistrationURL && activeSession)
+			if (loginOrRegistrationURL && activeSession) {
 				resp.sendRedirect(reqt.getContextPath() + "/clocking.xhtml");
 
-			else if (activeSession || reqURI.contains("javax.faces.resource") || loginOrRegistrationURL)
+			} else if (activeSession || reqURI.contains("javax.faces.resource") || loginOrRegistrationURL) {
 				chain.doFilter(request, response);
-
-			else
+			} else {
 				resp.sendRedirect(reqt.getContextPath() + "/login.xhtml");
+			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

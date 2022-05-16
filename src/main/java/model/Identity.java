@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import enums.Role;
 
@@ -38,9 +37,6 @@ public class Identity {
 	@PrimaryKeyJoinColumn
 	private Employee employee;
 
-	@Transient
-	private Role profileEnum;
-
 	public Identity() {
 		role = Role.User.toString();
 	}
@@ -51,14 +47,6 @@ public class Identity {
 
 	public void setRole(String role) {
 		this.role = role;
-	}
-
-	public Role getProfileEnum() {
-		return profileEnum;
-	}
-
-	public void setProfileEnum(Role profileEnum) {
-		this.profileEnum = profileEnum;
 	}
 
 	public Long getId() {

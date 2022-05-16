@@ -15,17 +15,9 @@
 <h:body>
 	<ui:include src="/template/header.xhtml" />
 	<h:form id="form">
-		<p:messages id="messages" showDetail="true" closable="true">
+		<p:messages id="messages" class="messages" showDetail="true" closable="true">
 			<p:autoUpdate />
 		</p:messages>
-
-		<p:ajaxStatus onstart="PF('statusDialog').show()"
-			onsuccess="PF('statusDialog').hide()" />
-
-		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
-			closable="false" resizable="false" showHeader="false">
-			<p:graphicImage name="images/ajaxloadingbar.gif" />
-		</p:dialog>
 
 		<p:panel class="login-panel">
 
@@ -41,7 +33,7 @@
 					width="100px" class="input-item" /> <p:outputLabel
 					value="Password" />
 			</span>
-			
+
 			<div class="ui-g">
 				<div class="ui-g-12 ui-lg-6">
 					<p:commandButton value="Sign in" icon="fa fa-fw fa-user-secret"
@@ -49,8 +41,7 @@
 				</div>
 				<div class="ui-g-12 ui-lg-6">
 					<p:commandButton value="Register" icon="fa fa-fw fa-user-secret"
-						action="register.xhtml?faces-redirect=true"
-						 />
+						action="register.xhtml?faces-redirect=true" />
 				</div>
 			</div>
 

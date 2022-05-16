@@ -2,10 +2,6 @@ package service;
 
 import java.util.List;
 
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
-
 import dao.IdentityDAO;
 import model.Identity;
 
@@ -37,12 +33,4 @@ public class IdentityService {
 		return dao.findByEmail(email);
 	}
 
-	public Identity getLoggedUser() {
-
-		FacesContext context = FacesContext.getCurrentInstance();
-		ExternalContext externalContext = context.getExternalContext();
-		Identity loggedUser = (Identity) externalContext.getSessionMap().get("loggedUser");
-
-		return loggedUser;
-	}
 }

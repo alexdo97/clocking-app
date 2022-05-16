@@ -2,12 +2,9 @@ package service;
 
 import java.util.List;
 
-import javax.ejb.Stateless;
-
 import dao.EmployeeDAO;
 import model.Employee;
 
-@Stateless
 public class EmployeeService {
 
 	private EmployeeDAO dao;

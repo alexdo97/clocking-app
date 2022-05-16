@@ -64,6 +64,10 @@ body {
 	font-weight: 600;
 }
 
+.messages {
+	width: 98%;
+}
+
 .panel-grid-center {
 	margin: 0 auto;
 }
@@ -89,6 +93,7 @@ body {
 	border: none !important;
 	padding: 0 !important;
 	margin-bottom: 2rem;
+	font-size: 25px !important;
 }
 
 .punch-in {

@@ -15,122 +15,126 @@
 <h:body>
 	<ui:include src="/template/header.xhtml" />
 	<h:form id="form">
-		<p:ajaxStatus onstart="PF('statusDialog').show()"
-			onsuccess="PF('statusDialog').hide()" />
 
-		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
-			closable="false" resizable="false" showHeader="false">
-			<p:graphicImage name="images/ajaxloadingbar.gif" />
-		</p:dialog>
 		<p:panel class="register-panel">
 			<f:facet name="header">
 				<p:outputLabel value="Register" class="register-title" />
 			</f:facet>
-			
+
 			<div class="ui-g">
-				<div class="ui-g-12 ui-md-6 ui-lg-4">
-					<p:outputLabel for="firstName" value="First Name:" />
+				<div class="ui-g-12 ui-md-6 ui-lg-6">
+					<div class="ui-g-12 ui-md-6 ui-lg-6">
+						<p:outputLabel for="firstName" value="First Name:" />
+					</div>
+					<div class="ui-g-12 ui-md-6 ui-lg-6">
+						<p:inputText id="firstName"
+							value="#{registerBean.newEmployee.firstName}" required="true"
+							validatorMessage="First Name: length should be minimum 2 characters">
+							<f:validateLength minimum="2" />
+							<p:ajax update="msgFirstName" event="blur" global="false" />
+						</p:inputText>
+					</div>
 				</div>
-				<div class="ui-g-12 ui-md-6 ui-lg-4">
-					<p:inputText id="firstName"
-						value="#{registerBean.newEmployee.firstName}" required="true"
-						validatorMessage="First Name: length should be minimum 2 characters">
-						<f:validateLength minimum="2" />
-						<p:ajax update="msgFirstName" event="blur" global="false" />
-					</p:inputText>
-				</div>
-				<div class="ui-g-12 ui-md-6 ui-lg-4">
+				<div class="ui-g-12 ui-md-6 ui-lg-6">
 					<p:message for="firstName" id="msgFirstName" showSummary="false" />
 				</div>
 			</div>
 
 
 			<div class="ui-g">
-				<div class="ui-g-12 ui-md-6 ui-lg-4">
-					<p:outputLabel for="lastName" value="Last Name:" />
+				<div class="ui-g-12 ui-md-6 ui-lg-6">
+					<div class="ui-g-12 ui-md-6 ui-lg-6">
+						<p:outputLabel for="lastName" value="Last Name:" />
+					</div>
+					<div class="ui-g-12 ui-md-6 ui-lg-6">
+						<p:inputText id="lastName"
+							value="#{registerBean.newEmployee.lastName}" required="true"
+							validatorMessage="Last Name: length should be minimum 2 characters">
+							<f:validateLength minimum="2" />
+							<p:ajax update="msgLastName" event="blur" global="false" />
+						</p:inputText>
+					</div>
 				</div>
-				<div class="ui-g-12 ui-md-6 ui-lg-4">
-					<p:inputText id="lastName"
-						value="#{registerBean.newEmployee.lastName}" required="true"
-						validatorMessage="Last Name: length should be minimum 2 characters">
-						<f:validateLength minimum="2" />
-						<p:ajax update="msgLastName" event="blur" global="false" />
-					</p:inputText>
-				</div>
-				<div class="ui-g-12 ui-md-6 ui-lg-4">
+				<div class="ui-g-12 ui-md-6 ui-lg-6">
 					<p:message for="lastName" id="msgLastName" />
 				</div>
 			</div>
 
-
-
 			<div class="ui-g">
-				<div class="ui-g-12 ui-md-6 ui-lg-4">
-					<p:outputLabel for="email" value="Email address:" />
+				<div class="ui-g-12 ui-md-6 ui-lg-6">
+					<div class="ui-g-12 ui-md-6 ui-lg-6">
+						<p:outputLabel for="email" value="Email address:" />
+					</div>
+					<div class="ui-g-12 ui-md-6 ui-lg-6">
+						<p:inputText id="email" value="#{registerBean.newIdentity.email}"
+							required="true"
+							validatorMessage="Email address: is not a valid email">
+							<f:validateRegex
+								pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+							<p:ajax update="msgEmail" event="blur" global="false" />
+						</p:inputText>
+					</div>
 				</div>
-				<div class="ui-g-12 ui-md-6 ui-lg-4">
-					<p:inputText id="email" value="#{registerBean.newIdentity.email}"
-						required="true"
-						validatorMessage="Email address: is not a valid email">
-						<f:validateRegex
-							pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
-						<p:ajax update="msgEmail" event="blur" global="false" />
-					</p:inputText>
-				</div>
-				<div class="ui-g-12 ui-md-6 ui-lg-4">
+				<div class="ui-g-12 ui-md-6 ui-lg-6">
 					<p:message for="email" id="msgEmail" />
 				</div>
 			</div>
 
 			<div class="ui-g">
-				<div class="ui-g-12 ui-md-6 ui-lg-4">
-					<p:outputLabel for="username" value="Username:" />
+				<div class="ui-g-12 ui-md-6 ui-lg-6">
+					<div class="ui-g-12 ui-md-6 ui-lg-6">
+						<p:outputLabel for="username" value="Username:" />
+					</div>
+					<div class="ui-g-12 ui-md-6 ui-lg-6">
+						<p:inputText id="username"
+							value="#{registerBean.newIdentity.username}" required="true"
+							validatorMessage="Username: length should be minimum 2 characters">
+							<f:validateLength minimum="2" />
+							<p:ajax update="msgUsername" event="blur" global="false" />
+						</p:inputText>
+					</div>
 				</div>
-				<div class="ui-g-12 ui-md-6 ui-lg-4">
-					<p:inputText id="username"
-						value="#{registerBean.newIdentity.username}" required="true"
-						validatorMessage="Username: length should be minimum 2 characters">
-						<f:validateLength minimum="2" />
-						<p:ajax update="msgUsername" event="blur" global="false" />
-					</p:inputText>
-				</div>
-				<div class="ui-g-12 ui-md-6 ui-lg-4">
+				<div class="ui-g-12 ui-md-6 ui-lg-6">
 					<p:message for="username" id="msgUsername" />
 				</div>
 			</div>
 
 			<div class="ui-g">
-				<div class="ui-g-12 ui-md-6 ui-lg-4">
-					<p:outputLabel for="password" value="Password:" />
+				<div class="ui-g-12 ui-md-6 ui-lg-6">
+					<div class="ui-g-12 ui-md-6 ui-lg-6">
+						<p:outputLabel for="password" value="Password:" />
+					</div>
+					<div class="ui-g-12 ui-md-6 ui-lg-6">
+						<p:inputText id="password" type="password"
+							value="#{registerBean.newIdentity.password}" required="true"
+							validatorMessage="Password: spaces are not allowed and length should be minimum 5 characters">
+							<f:validateLength minimum="5" />
+							<f:validateRegex pattern="^\S*$" />
+							<p:ajax update="msgPassword" event="blur" global="false" />
+						</p:inputText>
+					</div>
 				</div>
-				<div class="ui-g-12 ui-md-6 ui-lg-4">
-					<p:inputText id="password" type="password"
-						value="#{registerBean.newIdentity.password}" required="true"
-						validatorMessage="Password: spaces are not allowed and length should be minimum 5 characters">
-						<f:validateLength minimum="5" />
-						<f:validateRegex pattern="^\S*$" />
-						<p:ajax update="msgPassword" event="blur" global="false" />
-					</p:inputText>
-				</div>
-				<div class="ui-g-12 ui-md-6 ui-lg-4">
+				<div class="ui-g-12 ui-md-6 ui-lg-6">
 					<p:message for="password" id="msgPassword" />
 				</div>
 			</div>
 
 			<div class="ui-g" style="margin-bottom: 3rem;">
-				<div class="ui-g-12 ui-md-6 ui-lg-4">
-					<p:outputLabel for="confirmPassword" value="Confirm Password:" />
+				<div class="ui-g-12 ui-md-6 ui-lg-6">
+					<div class="ui-g-12 ui-md-6 ui-lg-6">
+						<p:outputLabel for="confirmPassword" value="Confirm Password:" />
+					</div>
+					<div class="ui-g-12 ui-md-6 ui-lg-6">
+						<p:inputText id="confirmPassword" type="password"
+							value="#{registerBean.confirmPassword}" required="true"
+							validatorMessage="Confirm Password: spaces are not allowed and length should be minimum 5 characters">
+							<f:validateLength minimum="5" />
+							<f:validateRegex pattern="^\S*$" />
+							<p:ajax update="msgConfirmPassword" event="blur" global="false" />
+						</p:inputText>
+					</div>
 				</div>
-				<div class="ui-g-12 ui-md-6 ui-lg-4">
-					<p:inputText id="confirmPassword" type="password"
-						value="#{registerBean.confirmPassword}" required="true"
-						validatorMessage="Confirm Password: spaces are not allowed and length should be minimum 5 characters">
-						<f:validateLength minimum="5" />
-						<f:validateRegex pattern="^\S*$" />
-						<p:ajax update="msgConfirmPassword" event="blur" global="false" />
-					</p:inputText>
-				</div>
-				<div class="ui-g-12 ui-md-6 ui-lg-4">
+				<div class="ui-g-12 ui-md-6 ui-lg-6">
 					<p:message for="form:confirmPassword" id="msgConfirmPassword" />
 				</div>
 			</div>
