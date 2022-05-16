@@ -25,11 +25,12 @@
 				currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
 				emptyMessage="No entry found with given criteria">
 				<p:column headerText="Id" styleClass="" filterBy="#{row.id}"
-					filterMatchMode="contains">
+					filterMatchMode="contains" sortBy="#{row.id}">
 					<h:outputText value="#{row.id}" />
 				</p:column>
 
 				<p:column headerText="Last Name" styleClass=""
+					filterBy="#{row.employee.lastName}" filterMatchMode="contains"
 					sortBy="#{row.employee.lastName}">
 					<h:outputText value="#{row.employee.lastName}" />
 				</p:column>

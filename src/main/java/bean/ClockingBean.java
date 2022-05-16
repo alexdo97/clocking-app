@@ -30,7 +30,7 @@ public class ClockingBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final DateTimeFormatter DTF_DATE = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	private static final DateTimeFormatter DTF_DATE = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 	private static final DateTimeFormatter DTF_TIME = DateTimeFormatter.ofPattern("HH:mm:ss");
 
 	private List<ClockingEntry> lastClockingActions;
