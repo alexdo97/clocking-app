@@ -11,7 +11,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import enums.Profile;
+import enums.Role;
 
 @Entity
 @Table(name = "identity")
@@ -31,33 +31,33 @@ public class Identity {
 	@Column(name = "email", unique = true, nullable = false, length = 150)
 	private String email;
 
-	@Column(name = "profile", nullable = false)
-	private Integer profile;
+	@Column(name = "role", nullable = false)
+	private String role;
 
 	@OneToOne(mappedBy = "identity", cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn
 	private Employee employee;
 
 	@Transient
-	private Profile profileEnum;
+	private Role profileEnum;
 
 	public Identity() {
-		profile = Profile.User.getCode();
+		role = Role.User.toString();
 	}
 
-	public Integer getProfile() {
-		return profile;
+	public String getRole() {
+		return role;
 	}
 
-	public void setProfile(Integer profile) {
-		this.profile = profile;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
-	public Profile getProfileEnum() {
+	public Role getProfileEnum() {
 		return profileEnum;
 	}
 
-	public void setProfileEnum(Profile profileEnum) {
+	public void setProfileEnum(Role profileEnum) {
 		this.profileEnum = profileEnum;
 	}
 

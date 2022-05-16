@@ -1,11 +1,11 @@
 package enums;
 
-public enum Profile {
+public enum Role {
 	Admin(1), User(2);
 
 	private Integer code;
 
-	Profile(Integer code) {
+	Role(Integer code) {
 		this.code = code;
 	}
 

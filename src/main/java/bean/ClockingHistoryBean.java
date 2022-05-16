@@ -10,11 +10,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-import enums.Profile;
+import enums.ActionType;
+import enums.Role;
 import model.ClockingEntry;
 import model.Identity;
 import service.ClockingService;
 import service.IdentityService;
+import util.EnumUtil;
 
 @SuppressWarnings("deprecation")
 @ManagedBean
@@ -29,6 +31,8 @@ public class ClockingHistoryBean implements Serializable {
 	private Identity identity;
 	private boolean adminRole;
 	private List<ClockingEntry> clockingEntryList = new ArrayList<ClockingEntry>();
+	private String[] actionTypes;
+	private String[] roles;
 
 	@EJB
 	private IdentityService identityService;
@@ -43,7 +47,9 @@ public class ClockingHistoryBean implements Serializable {
 		identityService = new IdentityService();
 		clockingService = new ClockingService();
 		identity = sessionBean.getIdentity();
-		adminRole = Profile.Admin.getCode().equals(identity.getProfile());
+		actionTypes = EnumUtil.getNames(ActionType.class);
+		roles = EnumUtil.getNames(Role.class);
+		adminRole = identity.getRole().equals(Role.Admin.toString());
 		if (adminRole) {
 			clockingEntryList = clockingService.getAll();
 		} else {
@@ -76,6 +82,30 @@ public class ClockingHistoryBean implements Serializable {
 
 	public void setSessionBean(SessionBean sessionBean) {
 		this.sessionBean = sessionBean;
+	}
+
+	public String[] getActionTypes() {
+		return actionTypes;
+	}
+
+	public void setActionTypes(String[] actionTypes) {
+		this.actionTypes = actionTypes;
+	}
+
+	public String[] getRoles() {
+		return roles;
+	}
+
+	public void setRoles(String[] roles) {
+		this.roles = roles;
+	}
+
+	public Identity getIdentity() {
+		return identity;
+	}
+
+	public void setIdentity(Identity identity) {
+		this.identity = identity;
 	}
 
 }

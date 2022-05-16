@@ -15,42 +15,72 @@
 
 <h:body>
 	<ui:include src="/template/header.xhtml" />
-	<div class="center" id="content">
-		<h:form id="topForm">
-			<p:dataTable var="row"
-				value="#{clockingHistoryBean.clockingEntryList}" lazy="false">
+	<h:form id="topForm">
+		<p:panel class="clocking-history-panel">
+			<p:outputLabel value="Clocking History" class="clocking-title" />
+			<p:dataTable var="row" widgetVar="entriesTable"
+				value="#{clockingHistoryBean.clockingEntryList}" lazy="false"
+				paginator="true" paginatorPosition="bottom" rows="10"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+				currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+				emptyMessage="No entry found with given criteria">
 				<p:column headerText="Id" styleClass="" filterBy="#{row.id}"
 					filterMatchMode="contains">
 					<h:outputText value="#{row.id}" />
 				</p:column>
 
 				<p:column headerText="Last Name" styleClass=""
-					filterBy="#{row.lastName}" filterMatchMode="contains">
+					sortBy="#{row.employee.lastName}">
 					<h:outputText value="#{row.employee.lastName}" />
 				</p:column>
 
 				<p:column headerText="First Name" styleClass=""
-					filterBy="#{row.firstName}" filterMatchMode="contains">
+					sortBy="#{row.employee.firstName}"
+					filterBy="#{row.employee.firstName}" filterMatchMode="contains">
 					<h:outputText value="#{row.employee.firstName}" />
 				</p:column>
 
 				<p:column headerText="Punch type" styleClass=""
-					filterBy="#{row.punchType}" filterMatchMode="contains">
+					sortBy="#{row.punchType}" filterBy="#{row.punchType}"
+					filterMatchMode="exact">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('entriesTable').filter()"
+							styleClass="custom-filter">
+							<f:selectItem itemLabel="All" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItems value="#{clockingHistoryBean.actionTypes}" />
+						</p:selectOneMenu>
+					</f:facet>
 					<h:outputText value="#{row.punchType}" />
 				</p:column>
 
-				<p:column headerText="Date" styleClass="" filterBy="#{row.date}"
-					filterMatchMode="contains">
+				<p:column headerText="Date" styleClass="" sortBy="#{row.date}"
+					filterBy="#{row.date}" filterMatchMode="contains">
 					<h:outputText value="#{row.date}" />
 				</p:column>
 
-				<p:column headerText="Time" styleClass="" filterBy="#{row.time}"
-					filterMatchMode="contains">
+				<p:column headerText="Time" styleClass="" sortBy="#{row.time}"
+					filterBy="#{row.time}" filterMatchMode="contains">
 					<h:outputText value="#{row.time}" />
 				</p:column>
+
+				<p:column headerText="Role"
+					rendered="#{clockingHistoryBean.adminRole}" styleClass=""
+					sortBy="#{row.employee.identity.role}"
+					filterBy="#{row.employee.identity.role}" filterMatchMode="exact">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('entriesTable').filter()"
+							styleClass="custom-filter">
+							<f:selectItem itemLabel="All" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItems value="#{clockingHistoryBean.roles}" />
+						</p:selectOneMenu>
+					</f:facet>
+					<h:outputText value="#{row.employee.identity.role}" />
+				</p:column>
 			</p:dataTable>
-		</h:form>
-	</div>
-	<ui:include src="/template/footer.xhtml" />
+
+		</p:panel>
+	</h:form>
 </h:body>
 </html>
