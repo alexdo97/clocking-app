@@ -14,57 +14,73 @@
 
 <h:body>
 	<ui:include src="/template/header.xhtml" />
-	<div class="center" id="content">
+	<h:form id="topForm">
+
 		<p:messages id="msgs" showDetail="true" closable="true">
 			<p:autoUpdate />
 		</p:messages>
-		<h:form id="topForm">
-			<p:panelGrid id="clocking">
-				<f:facet name="header">
-					<p:row>
-						<p:column colspan="2">Clocking</p:column>
-					</p:row>
-					<p:row>
-						<p:column colspan="2">
-							<h:outputText value="Local date time: " />
-							<p:clock pattern="dd-MM-yyyy HH:mm:ss" mode="server" />
-						</p:column>
-					</p:row>
-				</f:facet>
-				<p:row>
-					<p:column>
-						<p:commandButton value="Punch in"
-							styleClass="centeredColumnContent"
-							action="#{clockingBean.onPunchIn}" update="topForm:lastActions" />
-					</p:column>
-					<p:column>
-						<p:commandButton value="Punch out"
-							styleClass="centeredColumnContent"
-							action="#{clockingBean.onPunchOut}" update="topForm:lastActions" />
-					</p:column>
-				</p:row>
-			</p:panelGrid>
+		<p:panel class="clocking-panel">
+			<p:outputLabel value="Clocking" class="clocking-title" />
 
-			<p:panelGrid id="lastActions" columns="2">
+			<div class="ui-g">
+				<div class="ui-g-12">
+					<p:outputLabel value="Local date time: " />
+				</div>
+				<div class="ui-g-12">
+					<p:clock id="clock" pattern="dd-MM-yyyy HH:mm:ss" mode="server" />
+				</div>
+			</div>
+
+			<div class="ui-g">
+				<div class="ui-g-12 ui-lg-3"></div>
+				<div class="ui-g-12 ui-lg-3">
+					<p:commandButton value="Punch in"
+						styleClass="centeredColumnContent"
+						action="#{clockingBean.onPunchIn}" update="topForm:lastActions" />
+				</div>
+				<div class="ui-g-12 ui-lg-3">
+					<p:commandButton value="Punch out"
+						styleClass="centeredColumnContent"
+						action="#{clockingBean.onPunchOut}" update="topForm:lastActions" />
+				</div>
+				<div class="ui-g-12 ui-lg-3"></div>
+			</div>
+
+			<p:panelGrid id="lastActions"
+				class="panel-grid-center panel-grid-actions">
 				<f:facet name="header">
 					<p:row>
 						<p:column colspan="2">Last Actions</p:column>
 					</p:row>
 				</f:facet>
 
-				<h:outputText
-					value="#{clockingBean.lastClockingActions.get(0).punchType}" />
-				<h:outputText
-					value="#{clockingBean.lastClockingActions.get(0).dateTime}" />
+				<p:row>
+					<p:column
+						class="#{clockingBean.lastClockingActions.get(0).punchType eq 'PUNCH_IN' ? 'punch-in' : 'punch-out'}">
+						<h:outputText
+							value="#{clockingBean.lastClockingActions.get(0).punchType}" />
+					</p:column>
+					<p:column
+						class="#{clockingBean.lastClockingActions.get(0).punchType eq 'PUNCH_IN' ? 'punch-in' : 'punch-out'}">
+						<h:outputText
+							value="#{clockingBean.lastClockingActions.get(0).dateTime}" />
+					</p:column>
+				</p:row>
 
-				<h:outputText
-					value="#{clockingBean.lastClockingActions.get(1).punchType}" />
-				<h:outputText
-					value="#{clockingBean.lastClockingActions.get(1).dateTime}" />
-
+				<p:row>
+					<p:column
+						class="#{clockingBean.lastClockingActions.get(1).punchType eq 'PUNCH_IN' ? 'punch-in' : 'punch-out'}">
+						<h:outputText
+							value="#{clockingBean.lastClockingActions.get(1).punchType}" />
+					</p:column>
+					<p:column
+						class="#{clockingBean.lastClockingActions.get(1).punchType eq 'PUNCH_IN' ? 'punch-in' : 'punch-out'}">
+						<h:outputText
+							value="#{clockingBean.lastClockingActions.get(1).dateTime}" />
+					</p:column>
+				</p:row>
 			</p:panelGrid>
-		</h:form>
-	</div>
-	<ui:include src="/template/footer.xhtml" />
+		</p:panel>
+	</h:form>
 </h:body>
 </html>
