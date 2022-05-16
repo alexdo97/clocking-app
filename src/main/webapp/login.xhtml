@@ -41,11 +41,20 @@
 					width="100px" class="input-item" /> <p:outputLabel
 					value="Password" />
 			</span>
+			
+			<div class="ui-g">
+				<div class="ui-g-12 ui-lg-6">
+					<p:commandButton value="Sign in" icon="fa fa-fw fa-user-secret"
+						update="form" action="#{loginBean.login}" />
+				</div>
+				<div class="ui-g-12 ui-lg-6">
+					<p:commandButton value="Register" icon="fa fa-fw fa-user-secret"
+						action="register.xhtml?faces-redirect=true"
+						 />
+				</div>
+			</div>
 
-			<p:commandButton value="Sign in" icon="fa fa-fw fa-user-secret"
-				update="form" action="#{loginBean.login}" class="btn" />
-			<p:commandButton value="Register" icon="fa fa-fw fa-user-secret"
-				action="register.xhtml?faces-redirect=true" class="btn register-btn" />
+
 		</p:panel>
 	</h:form>
 </h:body>

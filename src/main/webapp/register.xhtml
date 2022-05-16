@@ -116,7 +116,7 @@
 				</div>
 			</div>
 
-			<div class="ui-g">
+			<div class="ui-g" style="margin-bottom: 3rem;">
 				<div class="ui-g-12 ui-md-6 ui-lg-4">
 					<p:outputLabel for="confirmPassword" value="Confirm Password:" />
 				</div>
@@ -135,16 +135,16 @@
 			</div>
 
 			<div class="ui-g">
-				<div class="ui-g-12 ui-md-6 ui-lg-6">
-					<p:commandButton value="Sign up" class="signup-btn btn"
-						icon="fa fa-fw fa-user-secret" update="form"
-						action="#{registerBean.validateRegistration}" />
+				<div class="ui-g-12 ui-lg-3"></div>
+				<div class="ui-g-12 ui-lg-3">
+					<p:commandButton value="Sign up" icon="fa fa-fw fa-user-secret"
+						update="form" action="#{registerBean.validateRegistration}" />
 				</div>
-				<div class="ui-g-12 ui-lg-6">
-					<p:commandButton value="To Login" class="back-login-btn btn"
-						icon="fa fa-fw fa-user-secret" immediate="true"
-						action="login.xhtml?faces-redirect=true" />
+				<div class="ui-g-12 ui-lg-3">
+					<p:commandButton value="To Login" icon="fa fa-fw fa-user-secret"
+						immediate="true" action="login.xhtml?faces-redirect=true" />
 				</div>
+				<div class="ui-g-12 ui-lg-3"></div>
 			</div>
 		</p:panel>
 	</h:form>
