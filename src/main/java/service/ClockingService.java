@@ -14,7 +14,7 @@ public class ClockingService {
 	}
 
 	public List<ClockingEntry> getAll() {
-		return dao.findAll();
+		return dao.getAll();
 	}
 
 	public List<ClockingEntry> getAllByEmployeeId(Long id) {

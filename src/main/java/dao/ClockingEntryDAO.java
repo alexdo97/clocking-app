@@ -13,9 +13,24 @@ public class ClockingEntryDAO extends GenericDAO<ClockingEntry, Long> {
 		List<ClockingEntry> clockingEntryList = new ArrayList<ClockingEntry>();
 		try {
 			entityManager.getTransaction().begin();
-			String sql = "from ClockingEntry where employee_id = :id";
+			String sql = "from ClockingEntry where employee_id = :id order by date DESC, time DESC";
 			TypedQuery<ClockingEntry> query = entityManager.createQuery(sql, ClockingEntry.class);
 			query.setParameter("id", id);
+			clockingEntryList = query.getResultList();
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			entityManager.getTransaction().rollback();
+		}
+		return clockingEntryList;
+	}
+
+	public List<ClockingEntry> getAll() {
+		List<ClockingEntry> clockingEntryList = new ArrayList<ClockingEntry>();
+		try {
+			entityManager.getTransaction().begin();
+			String sql = "from ClockingEntry order by date DESC, time DESC";
+			TypedQuery<ClockingEntry> query = entityManager.createQuery(sql, ClockingEntry.class);
 			clockingEntryList = query.getResultList();
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {

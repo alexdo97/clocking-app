@@ -18,7 +18,7 @@ public class IdentityService {
 	}
 
 	public List<Identity> getAll() {
-		return dao.findAll();
+		return dao.getAll();
 	}
 
 	public Identity findByUsernamePassword(String username, String password) {

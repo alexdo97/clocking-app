@@ -60,7 +60,7 @@ public class GenericDAO<T, PK extends Serializable> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<T> findAll() {
+	public List<T> getAll() {
 		entityManager.getTransaction().begin();
 		List<T> entityReturn = entityManager.createQuery("FROM " + entityClass.getName()).getResultList();
 		entityManager.getTransaction().commit();
